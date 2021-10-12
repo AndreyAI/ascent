@@ -1,4 +1,7 @@
 package com.example.diplomstrava.presentation
 
-class OnBoardingFragment {
+import androidx.fragment.app.Fragment
+import com.example.diplomstrava.R
+
+class OnBoardingFragment : Fragment(R.layout.fragment_onboarding) {
 }
