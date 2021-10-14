@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">DiplomStrava</string>
+    <string name="skip">Skip</string>
+    <string name="welcome_to_ascent">Welcome to Ascent</string>
+    <string name="desc_welcome">Here you can monitor your weight and activities</string>
 </resources>

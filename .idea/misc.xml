@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/drawable/ic_onboarding_ascent.xml" value="0.28125" />
         <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/layout/activity_main.xml" value="0.1983695652173913" />
+        <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/layout/fragment_onboarding.xml" value="0.14221014492753623" />
+        <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/layout/item_onboarding.xml" value="0.22" />
       </map>
     </option>
   </component>
