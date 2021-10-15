@@ -14,31 +14,11 @@ class OnBoardingAdapter(
 
     override fun createFragment(position: Int): Fragment {
         val screen: OnBoardingData = screens[position]
-        return FragmentIntoViewPager.newInstance(
-            textRes = screen.textRes,
-            drawableRes = screen.drawableRes
+        return OnBoardingItemFragment.newInstance(
+            headlineRes = screen.headlineText,
+            drawableRes = screen.onBoardImage,
+            descriptionRes = screen.descriptionText
         )
     }
 
 }
-
-/*
-class AdapterDataToFragment(
-    private val screens: List<DataScreen>,
-    fragment: Fragment
-) : FragmentStateAdapter(fragment) {
-
-    override fun getItemCount(): Int {
-        return screens.size
-    }
-
-    override fun createFragment(position: Int): Fragment {
-        Log.d("viewPager", "OnboardingAdapter createFragment $position")
-        val screen: DataScreen = screens[position]
-        return FragmentIntoViewPager.newInstance(
-            textRes = screen.textRes,
-            drawableRes = screen.drawableRes
-        )
-    }
-}
- */

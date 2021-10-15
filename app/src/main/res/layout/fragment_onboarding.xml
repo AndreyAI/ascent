@@ -11,24 +11,17 @@
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/spring_dots_indicator"/>
 
     <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
         android:id="@+id/spring_dots_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        app:dampingRatio="0.5"
-        app:dotsColor="@android:color/white"
-        app:dotsCornerRadius="2dp"
-        app:dotsSize="16dp"
-        app:dotsSpacing="6dp"
-        app:dotsStrokeColor="@android:color/black"
-        app:dotsStrokeWidth="2dp"
+        android:layout_marginBottom="56dp"
+        app:dotsSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:stiffness="300"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
