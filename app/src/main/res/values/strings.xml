@@ -1,10 +1,13 @@
 <resources>
     <string name="app_name">DiplomStrava</string>
     <string name="skip">Skip</string>
+    <string name="okay">Okay</string>
     <string name="welcome_to_ascent">Welcome to Ascent</string>
     <string name="desc_welcome">Here you can monitor your weight and activities</string>
     <string name="friends">Friends</string>
     <string name="desc_friends">Fill in the activity and weight fields, and then share the information with your friends</string>
     <string name="activities">Activities</string>
     <string name="desc_activities">Convenient weight and activity tracking system-fill out your profile and start living brightly</string>
+    <string name="already_a_member">Already a member</string>
+    <string name="continue_with_strava">Continue with Strava</string>
 </resources>

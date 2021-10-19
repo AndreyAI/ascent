@@ -7,7 +7,16 @@
 
     <fragment
         android:id="@+id/onBoardingFragment"
-        android:name="com.example.diplomstrava.presentation.OnBoardingFragment"
+        android:name="com.example.diplomstrava.presentation.onboarding.OnBoardingFragment"
         android:label="OnBoardingFragment"
-        tools:layout="@layout/fragment_onboarding"/>
+        tools:layout="@layout/fragment_onboarding">
+        <action
+            android:id="@+id/action_onBoardingFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.diplomstrava.presentation.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login"/>
 </navigation>

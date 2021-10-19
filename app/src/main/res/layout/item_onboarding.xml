@@ -16,18 +16,18 @@
         app:srcCompat="@drawable/ic_onboarding_ascent" />
 
     <Button
-        android:id="@+id/textButton"
+        android:id="@+id/buttonSkip"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
         android:text="@string/skip"
-        android:textSize="13sp"
         android:textAlignment="textEnd"
         android:textAllCaps="false"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        app:layout_constraintTop_toTopOf="@id/imageAscent"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/imageAscent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="@id/imageAscent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageWelcome"
@@ -38,6 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageAscent"
+        app:layout_constraintBottom_toTopOf="@+id/textHeadline"
         app:srcCompat="@drawable/ic_onboarding_welcome" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -51,7 +52,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageWelcome"
         app:layout_constraintStart_toStartOf="@+id/imageWelcome"
-        app:layout_constraintTop_toBottomOf="@+id/imageWelcome" />
+        app:layout_constraintTop_toBottomOf="@+id/imageWelcome"
+        app:layout_constraintBottom_toTopOf="@+id/textDescription"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textDescription"
@@ -66,6 +68,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintEnd_toEndOf="@+id/textHeadline"
         app:layout_constraintStart_toStartOf="@+id/textHeadline"
-        app:layout_constraintTop_toBottomOf="@+id/textHeadline"/>
+        app:layout_constraintTop_toBottomOf="@+id/textHeadline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

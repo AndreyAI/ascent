@@ -1,42 +1,49 @@
-package com.example.diplomstrava.presentation
+package com.example.diplomstrava.presentation.onboarding
 
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.diplomstrava.R
 import com.example.diplomstrava.data.OnBoardingData
 import com.example.diplomstrava.databinding.FragmentOnboardingBinding
+import timber.log.Timber
 import kotlin.math.abs
 
 class OnBoardingFragment : Fragment(R.layout.fragment_onboarding) {
 
     private val binding by viewBinding(FragmentOnboardingBinding::bind)
-
+    private val viewModel by viewModels<OnBoardingViewModel>()
     private val screens = listOf(
         OnBoardingData(
             headlineText = R.string.welcome_to_ascent,
             descriptionText = R.string.desc_welcome,
+            buttonText = R.string.skip,
             onBoardImage = R.drawable.ic_onboarding_welcome
         ),
         OnBoardingData(
             headlineText = R.string.friends,
             descriptionText = R.string.desc_friends,
+            buttonText = R.string.skip,
             onBoardImage = R.drawable.ic_onboarding_friends
         ),
         OnBoardingData(
             headlineText = R.string.activities,
             descriptionText = R.string.desc_activities,
+            buttonText = R.string.okay,
             onBoardImage = R.drawable.ic_onboarding_activities
         )
     )
+    var a = 0
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initViewPager()
+
     }
 
     private fun initViewPager() {
@@ -50,19 +57,19 @@ class OnBoardingFragment : Fragment(R.layout.fragment_onboarding) {
             page.alpha = 1 - abs(position)
         }
 
-//        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-//            tab.text = getString(articleToShow[position].textRes)
-//
-//            if (screens[position].amountBadge > 0) {
-//                tab.orCreateBadge.apply {
-//                    number = screens[position].amountBadge
-//                    badgeGravity = BadgeDrawable.TOP_END
-//                }
-//            } else {
-//                tab.removeBadge()
-//            }
-//        }.attach()
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                viewModel.saveCurrentPos(position)
+            }
+        })
 
+
+
+        viewModel.currentPage.observe(viewLifecycleOwner) {
+            binding.viewPager.currentItem = it
+            adapter.notifyDataSetChanged() //https://github.com/tommybuonomo/dotsindicator/issues/68
+        }
 
     }
 }

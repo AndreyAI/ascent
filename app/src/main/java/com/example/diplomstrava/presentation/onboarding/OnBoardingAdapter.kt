@@ -1,4 +1,4 @@
-package com.example.diplomstrava.presentation
+package com.example.diplomstrava.presentation.onboarding
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -17,7 +17,9 @@ class OnBoardingAdapter(
         return OnBoardingItemFragment.newInstance(
             headlineRes = screen.headlineText,
             drawableRes = screen.onBoardImage,
-            descriptionRes = screen.descriptionText
+            descriptionRes = screen.descriptionText,
+            buttonRes = screen.buttonText
+
         )
     }
 
