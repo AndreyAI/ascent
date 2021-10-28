@@ -16,6 +16,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [
+                appAuthRedirectScheme: "diplomstrava"
+        ]
     }
 
     buildTypes {
@@ -77,4 +81,22 @@ dependencies {
 
     //Material
     implementation 'com.google.android.material:material:1.5.0-alpha04'
+
+    //Moshi
+    def moshiVersion = '1.9.3'
+
+    implementation "com.squareup.moshi:moshi:$moshiVersion"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
+
+    //Retrofit
+
+    def retrofitVersion = '2.9.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+
+    implementation "com.squareup.okhttp3:logging-interceptor:4.8.0"
+
+    //AppAuth
+    implementation 'net.openid:appauth:0.10.0'
 }

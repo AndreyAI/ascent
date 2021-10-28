@@ -16,7 +16,16 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.diplomstrava.presentation.LoginFragment"
+        android:name="com.example.diplomstrava.presentation.auth.AuthFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login"/>
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_personFragment"
+            app:destination="@id/personFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personFragment"
+        android:name="com.example.diplomstrava.presentation.PersonFragment"
+        android:label="PersonFragment"
+        tools:layout="@layout/fragment_person"/>
 </navigation>
