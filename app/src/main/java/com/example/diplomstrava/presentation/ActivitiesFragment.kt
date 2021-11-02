@@ -7,7 +7,6 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.diplomstrava.R
 import com.example.diplomstrava.databinding.FragmentActivitiesBinding
-import com.example.diplomstrava.databinding.FragmentContainerBinding
 
 class ActivitiesFragment: Fragment(R.layout.fragment_activities) {
 

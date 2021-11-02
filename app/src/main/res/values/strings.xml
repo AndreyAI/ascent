@@ -34,4 +34,10 @@
     <string name="distance">Distance</string>
     <string name="description">Description</string>
     <string name="add">Add</string>
+    <string name="run_1">Run 1</string>
+    <string name="distance">Distance</string>
+    <string name="_0_km">0 km</string>
+    <string name="elevation_gain">Elevation Gain</string>
+    <string name="long_distance_running">long distance running</string>
+    <string name="the_best_app_for_cyclists_and_runners">The best app for cyclists and runners!</string>
 </resources>
