@@ -50,7 +50,7 @@ class AuthFragment: Fragment(R.layout.fragment_login) {
         viewModel.loadingLiveData.observe(viewLifecycleOwner, ::updateIsLoading)
         viewModel.openAuthPageLiveData.observe(viewLifecycleOwner, ::openAuthPage)
         viewModel.authSuccessLiveData.observe(viewLifecycleOwner) {
-            findNavController().navigate(AuthFragmentDirections.actionLoginFragmentToPersonFragment())
+            findNavController().navigate(AuthFragmentDirections.actionLoginFragmentToContainerFragment())
         }
     }
 

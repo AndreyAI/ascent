@@ -10,6 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/scroll"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,107 +26,226 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:cardElevation="20dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp">
 
-            <!-- Media -->
-            <ImageView
-                android:id="@+id/imageAvatar"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
-                android:layout_marginTop="20dp"
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardPerson"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:cardElevation="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/textName"
-                style="?attr/textAppearanceHeadline5"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/test_name"
-                app:layout_constraintBottom_toBottomOf="@id/imageAvatar"
-                app:layout_constraintStart_toEndOf="@id/imageAvatar"
-                app:layout_constraintTop_toTopOf="@id/imageAvatar"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/textMail"
-                style="@style/smallText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/test_mail"
-                app:layout_constraintStart_toEndOf="@id/imageAvatar"
-                app:layout_constraintTop_toBottomOf="@id/textName" />
+                    <ImageView
+                        android:id="@+id/imageAvatar"
+                        android:layout_width="100dp"
+                        android:layout_height="70dp"
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@tools:sample/avatars" />
 
-            <TextView
-                android:id="@+id/textFollowing"
-                style="@style/smallText"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="@string/following"
-                android:textSize="12sp"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="30dp"
+                    <TextView
+                        android:id="@+id/textName"
+                        style="?attr/textAppearanceHeadline5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/test_name"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/imageAvatar"
+                        app:layout_constraintStart_toEndOf="@id/imageAvatar"
+                        app:layout_constraintTop_toTopOf="@id/imageAvatar" />
+
+                    <TextView
+                        android:id="@+id/textMail"
+                        style="@style/smallText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/test_mail"
+                        app:layout_constraintStart_toEndOf="@id/imageAvatar"
+                        app:layout_constraintTop_toBottomOf="@id/textName" />
+
+                    <TextView
+                        android:id="@+id/textFollowing"
+                        style="@style/smallText"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginTop="30dp"
+                        android:text="@string/following"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageAvatar" />
+
+                    <TextView
+                        android:id="@+id/textFollowers"
+                        style="@style/smallText"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginTop="30dp"
+                        android:text="@string/followers"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@id/textFollowing"
+                        app:layout_constraintTop_toBottomOf="@id/imageAvatar" />
+
+                    <TextView
+                        android:id="@+id/textFollowingCount"
+                        style="@style/TextAppearance.MaterialComponents.Headline5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_109"
+                        app:layout_constraintStart_toStartOf="@id/textFollowing"
+                        app:layout_constraintTop_toBottomOf="@id/textFollowing" />
+
+                    <TextView
+                        android:id="@+id/textFollowersCount"
+                        style="@style/TextAppearance.MaterialComponents.Headline5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_109"
+                        app:layout_constraintStart_toStartOf="@id/textFollowers"
+                        app:layout_constraintTop_toBottomOf="@id/textFollowers" />
+
+                    <Button
+                        android:id="@+id/buttonShare"
+                        android:layout_width="106dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="@string/share"
+                        android:textAllCaps="false"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/textFollowers" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardPersonInfo"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageAvatar" />
+                app:layout_constraintTop_toBottomOf="@id/cardPerson">
 
-            <TextView
-                android:id="@+id/textFollowers"
-                style="@style/smallText"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="@string/followers"
-                android:textSize="12sp"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="30dp"
-                app:layout_constraintStart_toEndOf="@id/textFollowing"
-                app:layout_constraintTop_toBottomOf="@id/imageAvatar" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/textFollowingCount"
-                style="@style/TextAppearance.MaterialComponents.Headline5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_109"
-                app:layout_constraintStart_toStartOf="@id/textFollowing"
-                app:layout_constraintTop_toBottomOf="@id/textFollowing" />
 
-            <TextView
-                android:id="@+id/textFollowersCount"
-                style="@style/TextAppearance.MaterialComponents.Headline5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_109"
-                app:layout_constraintStart_toStartOf="@id/textFollowers"
-                app:layout_constraintTop_toBottomOf="@id/textFollowers" />
+                    <TextView
+                        android:id="@+id/textTitleGender"
+                        style="@style/smallText"
+                        android:layout_width="61dp"
+                        android:layout_height="26dp"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/gender"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textGender"
+                        style="@style/personForm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/female"
+                        app:layout_constraintStart_toStartOf="@id/textTitleGender"
+                        app:layout_constraintTop_toBottomOf="@id/textTitleGender" />
+
+                    <TextView
+                        android:id="@+id/textTitleCountry"
+                        style="@style/smallText"
+                        android:layout_width="70dp"
+                        android:layout_height="26dp"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/country"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@id/textGender"
+                        app:layout_constraintTop_toBottomOf="@id/textGender" />
+
+                    <TextView
+                        android:id="@+id/textCountry"
+                        style="@style/personForm"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/russia"
+                        app:layout_constraintStart_toStartOf="@id/textTitleCountry"
+                        app:layout_constraintTop_toBottomOf="@id/textTitleCountry" />
+
+                    <TextView
+                        android:id="@+id/textTitleWeight"
+                        style="@style/smallText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="@string/weight_edit"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@id/textCountry"
+                        app:layout_constraintTop_toBottomOf="@id/textCountry" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/spinnerWeight"
+                        style="@style/dropDownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginEnd="60dp"
+                        app:endIconDrawable="@drawable/ic_arrow_dropdown"
+                        app:endIconTint="@color/dark_gray"
+                        app:layout_constraintStart_toStartOf="@id/textTitleWeight"
+                        app:layout_constraintTop_toBottomOf="@id/textTitleWeight">
+
+                        <AutoCompleteTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
             <Button
-                android:id="@+id/buttonShare"
-                android:layout_width="106dp"
+                android:id="@+id/buttonLogout"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="@string/share"
-                android:textSize="12sp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="40dp"
+                android:text="@string/logout"
                 android:textAllCaps="false"
-                app:layout_constraintTop_toTopOf="@id/textFollowers"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-
-
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardPersonInfo" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
-    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

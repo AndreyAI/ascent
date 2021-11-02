@@ -20,12 +20,31 @@
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/action_loginFragment_to_personFragment"
-            app:destination="@id/personFragment" />
+            android:id="@+id/action_loginFragment_to_containerFragment"
+            app:destination="@id/containerFragment" />
     </fragment>
     <fragment
         android:id="@+id/personFragment"
         android:name="com.example.diplomstrava.presentation.PersonFragment"
         android:label="PersonFragment"
         tools:layout="@layout/fragment_person"/>
+    <fragment
+        android:id="@+id/containerFragment"
+        android:name="com.example.diplomstrava.presentation.ContainerFragment"
+        android:label="ContainerFragment"
+        tools:layout="@layout/fragment_container">
+        <action
+            android:id="@+id/action_containerFragment_to_addActivityFragment"
+            app:destination="@id/addActivityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/activitiesFragment"
+        android:name="com.example.diplomstrava.presentation.ActivitiesFragment"
+        android:label="ActivitiesFragment"
+        tools:layout="@layout/fragment_activities"/>
+    <fragment
+        android:id="@+id/addActivityFragment"
+        android:name="com.example.diplomstrava.presentation.AddActivityFragment"
+        android:label="AddActivityFragment"
+        tools:layout="@layout/fragment_add_activity"/>
 </navigation>
