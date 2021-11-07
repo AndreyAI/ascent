@@ -19,12 +19,11 @@ object Networking {
         .build()
 
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://api.github.com/")
+        .baseUrl("https://www.strava.com/api/v3/")
         .addConverterFactory(MoshiConverterFactory.create())
         .client(okhttpClient)
         .build()
-//
-//
-//    val githubApi: GithubApi
-//        get() = retrofit.create()
+
+    val stravaApi: StravaApi
+        get() = retrofit.create()
 }

@@ -39,12 +39,12 @@
     </fragment>
     <fragment
         android:id="@+id/activitiesFragment"
-        android:name="com.example.diplomstrava.presentation.ActivitiesFragment"
+        android:name="com.example.diplomstrava.presentation.activities.ActivitiesFragment"
         android:label="ActivitiesFragment"
         tools:layout="@layout/fragment_activities"/>
     <fragment
         android:id="@+id/addActivityFragment"
-        android:name="com.example.diplomstrava.presentation.AddActivityFragment"
+        android:name="com.example.diplomstrava.presentation.addactivity.AddActivityFragment"
         android:label="AddActivityFragment"
         tools:layout="@layout/fragment_add_activity"/>
 </navigation>

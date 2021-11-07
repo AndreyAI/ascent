@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.diplomstrava.R
 import com.example.diplomstrava.databinding.FragmentContainerBinding
+import com.example.diplomstrava.presentation.activities.ActivitiesFragment
 
 class ContainerFragment: Fragment(R.layout.fragment_container) {
 
