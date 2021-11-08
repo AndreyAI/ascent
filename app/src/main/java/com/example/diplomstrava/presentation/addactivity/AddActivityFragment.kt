@@ -22,8 +22,8 @@ class AddActivityFragment : Fragment(R.layout.fragment_add_activity) {
                 name = binding.editName.editText?.text.toString(),
                 type = "Run", // after add type activity to spinner https://developers.strava.com/docs/reference/#api-models-ActivityType
                 date = binding.editDate.editText?.text.toString(),
-                time = binding.editTime.editText?.text.toString(),
-                distance = binding.editDistance.editText?.text.toString(),
+                time = binding.editTime.editText?.text.toString().toLong(),
+                distance = binding.editDistance.editText?.text.toString().toDouble(),
                 description = binding.editDescription.editText?.text.toString()
             )
         }

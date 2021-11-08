@@ -16,8 +16,8 @@ class AddActivityViewModel : ViewModel() {
         name: String,
         type: String,
         date: String,
-        time: String,
-        distance: String,
+        time: Long,
+        distance: Double,
         description: String
     ) {
         viewModelScope.launch(Dispatchers.IO) {

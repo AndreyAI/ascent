@@ -72,24 +72,33 @@
                 app:layout_constraintStart_toStartOf="@id/imageAvatar"
                 app:layout_constraintTop_toBottomOf="@id/imageAvatar" />
 
-            <TextView
-                android:id="@+id/textDistance"
-                style="@style/smallText"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/textDistanceContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/distance"
                 app:layout_constraintStart_toStartOf="@id/textTitleActivity"
-                app:layout_constraintTop_toBottomOf="@id/textTitleActivity" />
+                app:layout_constraintTop_toBottomOf="@id/textTitleActivity">
 
-            <TextView
-                android:id="@+id/textDistanceField"
-                style="@style/TextAppearance.MaterialComponents.Headline5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_0_km"
-                app:layout_constraintStart_toStartOf="@id/textDistance"
-                app:layout_constraintTop_toBottomOf="@id/textDistance" />
+                <TextView
+                    android:id="@+id/textDistance"
+                    style="@style/smallText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/distance"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textDistanceField"
+                    style="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_0_km"
+                    app:layout_constraintStart_toStartOf="@id/textDistance"
+                    app:layout_constraintTop_toBottomOf="@id/textDistance" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                 android:id="@+id/divider1"
@@ -98,28 +107,37 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"
                 android:background="@color/gray_divider"
-                app:layout_constraintBottom_toBottomOf="@+id/textDistanceField"
-                app:layout_constraintStart_toEndOf="@+id/textDistanceField" />
+                app:layout_constraintBottom_toBottomOf="@+id/textDistanceContainer"
+                app:layout_constraintStart_toEndOf="@+id/textDistanceContainer" />
 
-            <TextView
-                android:id="@+id/textTime"
-                style="@style/smallText"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/textTimeContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/distance"
                 app:layout_constraintStart_toEndOf="@id/divider1"
-                app:layout_constraintTop_toBottomOf="@id/textTitleActivity" />
+                app:layout_constraintTop_toBottomOf="@id/textTitleActivity">
 
-            <TextView
-                android:id="@+id/textTimeField"
-                style="@style/TextAppearance.MaterialComponents.Headline5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_0_km"
-                app:layout_constraintStart_toStartOf="@id/textTime"
-                app:layout_constraintTop_toBottomOf="@id/textTime" />
+                <TextView
+                    android:id="@+id/textTime"
+                    style="@style/smallText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/time"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textTimeField"
+                    style="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_0_km"
+                    app:layout_constraintStart_toStartOf="@id/textTime"
+                    app:layout_constraintTop_toBottomOf="@id/textTime" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                 android:id="@+id/divider2"
@@ -128,77 +146,102 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"
                 android:background="@color/gray_divider"
-                app:layout_constraintBottom_toBottomOf="@+id/textTimeField"
-                app:layout_constraintStart_toEndOf="@+id/textTimeField" />
+                app:layout_constraintBottom_toBottomOf="@+id/textTimeContainer"
+                app:layout_constraintStart_toEndOf="@+id/textTimeContainer" />
 
-            <TextView
-                android:id="@+id/textElevation"
-                style="@style/smallText"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/textElevationContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/elevation_gain"
                 app:layout_constraintStart_toEndOf="@id/divider2"
-                app:layout_constraintTop_toBottomOf="@id/textTitleActivity" />
+                app:layout_constraintTop_toBottomOf="@id/textTitleActivity">
 
-            <TextView
-                android:id="@+id/textElevationField"
-                style="@style/TextAppearance.MaterialComponents.Headline5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_0_km"
-                app:layout_constraintStart_toStartOf="@id/textElevation"
-                app:layout_constraintTop_toBottomOf="@id/textElevation" />
+                <TextView
+                    android:id="@+id/textElevation"
+                    style="@style/smallText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/elevation_gain"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textElevationField"
+                    style="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_0_km"
+                    app:layout_constraintStart_toStartOf="@id/textElevation"
+                    app:layout_constraintTop_toBottomOf="@id/textElevation" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/imageActivity"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/activity_run"
                 android:scaleType="centerCrop"
+                android:src="@drawable/activity_run"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textDistanceField"/>
+                app:layout_constraintTop_toBottomOf="@+id/textDistanceContainer" />
 
-            <TextView
-                android:id="@+id/textActivityGroup"
-                android:layout_width="130dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/textActivityGroupContainer"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="18dp"
-                android:textSize="11sp"
-                android:textColor="@color/black"
-                android:textAlignment="center"
-                android:text="@string/long_distance_running"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
                 android:background="@color/white"
                 app:layout_constraintStart_toStartOf="@id/imageActivity"
-                app:layout_constraintTop_toTopOf="@id/imageActivity" />
+                app:layout_constraintTop_toTopOf="@id/imageActivity">
+
+                <TextView
+                    android:id="@+id/textActivityGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/white"
+                    android:text="@string/long_distance_running"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/textDescription"
                 style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/dark_gray"
-                android:textAlignment="center"
+                android:layout_marginEnd="10dp"
                 android:text="@string/the_best_app_for_cyclists_and_runners"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textAlignment="center"
+                android:textColor="@color/dark_gray"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageActivity" />
 
             <View
                 android:id="@+id/divider3"
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/gray_divider"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textDescription" />
 
             <ImageView
@@ -208,10 +251,11 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
                 android:src="@drawable/ic_share"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider3"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:tint="@color/black" />
 
 

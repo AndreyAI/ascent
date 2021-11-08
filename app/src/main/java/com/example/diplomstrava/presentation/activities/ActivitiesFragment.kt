@@ -7,42 +7,32 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.diplomstrava.R
+import com.example.diplomstrava.data.Activity
 import com.example.diplomstrava.databinding.FragmentActivitiesBinding
-import com.example.diplomstrava.presentation.ContainerFragmentDirections
 import com.example.diplomstrava.presentation.activities.adapter.ActivityListAdapter
+import com.example.diplomstrava.presentation.containerfragment.ContainerFragmentDirections
 import com.example.diplomstrava.utils.autoCleared
 import timber.log.Timber
 
 class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
 
     private val binding by viewBinding(FragmentActivitiesBinding::bind)
-
-    //private var activityAdapter: ActivityListAdapter by autoCleared()
+    private var activityAdapter: ActivityListAdapter by autoCleared()
     private val viewModel: ActivitiesViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initList()
         listenersInit()
         bindViewModel()
 
     }
 
     private fun bindViewModel() {
-
-        viewModel.activities.observe(viewLifecycleOwner) { Timber.d(it.toString()) }
-
-//        lifecycleScope.launch {
-//
-//            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-//
-//                viewModel.movieList.collect {
-//                    movieAdapter.items = it
-//                    Timber.d(Thread.currentThread().toString())
-//                }
-//            }
-//        }
-
+        viewModel.activities.observe(viewLifecycleOwner) {
+            activityAdapter.items = it
+        }
     }
 
     private fun listenersInit() {
@@ -54,11 +44,29 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
             when (menuItem.itemId) {
                 R.id.refresh -> {
                     viewModel.bindViewModel()
+
                     true
                 }
                 else -> false
             }
         }
+    }
+
+    private fun initList() {
+        activityAdapter = ActivityListAdapter(
+            "andrey alyabev", "sdf"
+        ) {
+            shareActivity(it)
+        }
+        with(binding.listActivities) {
+            adapter = activityAdapter
+            setHasFixedSize(true)
+        }
+    }
+
+
+    private fun shareActivity(activity: Activity) {
+        Timber.d(activity.description)
     }
 
     private fun addActivityNav() {

@@ -18,8 +18,8 @@ class RepositoryActivity {
         name: String,
         type: String,
         date: String,
-        time: String,
-        distance: String,
+        time: Long,
+        distance: Double,
         description: String
     ) {
         val activity = Activity(
@@ -27,8 +27,8 @@ class RepositoryActivity {
             name = name,
             type = type,
             date = date,
-            time = 0,
-            distance = 71.1,
+            time = time,
+            distance = distance,
             elevation = 0,
             description = description
         )
@@ -36,9 +36,7 @@ class RepositoryActivity {
     }
 
     fun queryNewActivities(): List<Activity> {
-        val response = Networking.stravaApi.getActivities()
-            .execute()//Network.getSearchMovieCall(query, movieTypeToString(type)).execute()
-        Timber.d(response.body().toString())
+        val response = Networking.stravaApi.getActivities().execute()
         val activities = response.body() ?: emptyList()
         activityDao.insertActivities(activities)
         return activities
