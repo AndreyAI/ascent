@@ -20,7 +20,7 @@ data class Activity(
     val name: String,
     @ColumnInfo(name = ActivityContract.Columns.DISTANCE)
     @Json(name = ActivityContract.Columns.DISTANCE)
-    val distance: Long,
+    val distance: Double,
     @ColumnInfo(name = ActivityContract.Columns.TIME)
     @Json(name = ActivityContract.Columns.TIME)
     val time: Long,
@@ -35,5 +35,5 @@ data class Activity(
     val date: String,
     @ColumnInfo(name = ActivityContract.Columns.DESCRIPTION)
     @Json(name = ActivityContract.Columns.DESCRIPTION)
-    val description: String
+    val description: String?
 )

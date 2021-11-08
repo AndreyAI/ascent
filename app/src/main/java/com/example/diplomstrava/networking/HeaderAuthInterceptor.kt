@@ -8,7 +8,8 @@ class HeaderAuthInterceptor : Interceptor {
         val originalRequest = chain.request()
 
         val modifiedRequest = originalRequest.newBuilder()
-            .addHeader("Authorization", "token ${Networking.accessToken}")
+            //.addHeader("Authorization", "token ${Networking.accessToken}")
+            .addHeader("Authorization", "Bearer ${Networking.accessToken}")
             .build()
 
         return chain.proceed(modifiedRequest)

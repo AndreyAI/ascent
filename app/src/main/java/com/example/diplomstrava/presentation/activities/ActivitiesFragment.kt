@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.diplomstrava.R
@@ -13,13 +11,13 @@ import com.example.diplomstrava.databinding.FragmentActivitiesBinding
 import com.example.diplomstrava.presentation.ContainerFragmentDirections
 import com.example.diplomstrava.presentation.activities.adapter.ActivityListAdapter
 import com.example.diplomstrava.utils.autoCleared
-import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
 
     private val binding by viewBinding(FragmentActivitiesBinding::bind)
-    private var activityAdapter: ActivityListAdapter by autoCleared()
+
+    //private var activityAdapter: ActivityListAdapter by autoCleared()
     private val viewModel: ActivitiesViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,6 +48,16 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
     private fun listenersInit() {
         binding.fabAdd.setOnClickListener {
             addActivityNav()
+        }
+
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.refresh -> {
+                    viewModel.bindViewModel()
+                    true
+                }
+                else -> false
+            }
         }
     }
 

@@ -13,6 +13,5 @@ object ActivityContract {
         const val TYPE = "type"
         const val DATE = "start_date_local"
         const val DESCRIPTION = "description"
-
     }
 }

@@ -2,7 +2,7 @@ package com.example.diplomstrava.data.auth
 
 import net.openid.appauth.ResponseTypeValues
 
-object AuthConfig {
+object  AuthConfig {
 
 //    const val AUTH_URI = "https://github.com/login/oauth/authorize"
 //    const val TOKEN_URI = "https://github.com/login/oauth/access_token"
@@ -16,7 +16,7 @@ object AuthConfig {
     const val AUTH_URI = "https://www.strava.com/oauth/mobile/authorize"
     const val TOKEN_URI = "https://www.strava.com/oauth/token"
     const val RESPONSE_TYPE = ResponseTypeValues.CODE
-    const val SCOPE = "activity:write,read"
+    const val SCOPE = "activity:write,activity:read"
     const val APPROVAL_PROMPT= "auto"
 
     const val CLIENT_ID = "73381"

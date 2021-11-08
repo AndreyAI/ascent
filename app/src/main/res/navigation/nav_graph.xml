@@ -30,7 +30,7 @@
         tools:layout="@layout/fragment_person"/>
     <fragment
         android:id="@+id/containerFragment"
-        android:name="com.example.diplomstrava.presentation.ContainerFragment"
+        android:name="com.example.diplomstrava.presentation.containerfragment.ContainerFragment"
         android:label="ContainerFragment"
         tools:layout="@layout/fragment_container">
         <action

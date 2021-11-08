@@ -36,7 +36,6 @@ class OnBoardingFragment : Fragment(R.layout.fragment_onboarding) {
             onBoardImage = R.drawable.ic_onboarding_activities
         )
     )
-    var a = 0
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

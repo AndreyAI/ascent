@@ -2,18 +2,30 @@ package com.example.diplomstrava.presentation.activities
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.diplomstrava.data.RepositoryActivity
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
-class ActivitiesViewModel: ViewModel() {
+class ActivitiesViewModel : ViewModel() {
 
     private val repository = RepositoryActivity()
 
     val activities = repository.getActivities().asLiveData()
 
 
-    fun bind() {
+    fun bindViewModel() {
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                repository.queryNewActivities()
+            } catch (t: Throwable) {
+                Timber.e(t)
+            }
+        }
 
     }
 }
