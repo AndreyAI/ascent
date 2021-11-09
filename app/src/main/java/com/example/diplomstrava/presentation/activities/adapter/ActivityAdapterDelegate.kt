@@ -4,9 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.diplomstrava.data.Activity
 import com.example.diplomstrava.databinding.ItemActivityBinding
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
+import java.math.RoundingMode
+import java.text.DecimalFormat
+import org.threeten.bp.*
+import org.threeten.bp.format.DateTimeFormatter
+import java.lang.Exception
+
 
 class ActivityAdapterDelegate(
     private val userName: String,
@@ -57,14 +64,14 @@ class ActivityAdapterDelegate(
                     onShareActivity(it)
                 }
             }
-//            Glide.with(itemView)
-//                .load(this.avatarUrl)
-//                .into(binding.imageAvatar)
+            Glide.with(itemView)
+                .load(this.avatarUrl)
+                .into(binding.imageAvatar)
             binding.textName.text = userName
-            binding.textDate.text = activity.date
+            binding.textDate.text = formatDate(activity.date)
             binding.textTitleActivity.text = activity.name
             binding.textDistanceField.text = formatKm(activity.distance)
-            binding.textTimeField.text = activity.time.toString()
+            binding.textTimeField.text = formatTime(activity.time)
             binding.textElevationField.text = formatM(activity.elevation) // or foot?
             binding.textActivityGroup.text = activity.type
             if (activity.description == null) binding.textDescription.isVisible = false
@@ -77,68 +84,64 @@ class ActivityAdapterDelegate(
     companion object {
 
         fun formatKm(meters: Double): String {
-            return "${meters / 1000.0} km"
+            val df = DecimalFormat("#.##")
+            df.roundingMode = RoundingMode.FLOOR
+            val km = df.format(meters / 1000.0)
+            return "$km km"
         }
 
         fun formatM(meters: Long): String {
             return "$meters m"
         }
 
+        fun formatTime(seconds: Long): String {
+            var time = ""
+            val hours = seconds.toInt() / 3600
+            if (hours != 0) time += "$hours h"
+            var remainder = seconds.toInt() - hours * 3600
+            val minutes = remainder / 60
+            if (minutes != 0) time += "$minutes m"
+            remainder -= minutes * 60
+            val secs = remainder
+            if (secs != 0) time += "$secs s"
 
-    }
+            if (time == "") time = "0 s"
 
-}
-
-/*
-package com.example.materialdesigne.adapter
-
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.materialdesigne.AndroidCard
-import com.example.materialdesigne.databinding.ItemCardBinding
-import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
-
-class AndroidAdapterDelegate() :
-    AbsListItemAdapterDelegate<AndroidCard, AndroidCard, AndroidAdapterDelegate.Holder>() {
-
-    override fun isForViewType(
-        item: AndroidCard,
-        items: MutableList<AndroidCard>,
-        position: Int
-    ): Boolean {
-        return true
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup): Holder {
-        val binding = ItemCardBinding.inflate(LayoutInflater.from(parent.context))
-        return Holder(binding)
-    }
-
-    override fun onBindViewHolder(item: AndroidCard, holder: Holder, payloads: MutableList<Any>) {
-        holder.bind(item)
-    }
-
-    class Holder(
-        private val binding: ItemCardBinding,
-    ) : RecyclerView.ViewHolder(binding.root) {
-
-        private var currentCard: AndroidCard? = null
-
-//        init {
-//            binding.root.setOnClickListener {  }
-//        }
-
-        fun bind(card: AndroidCard) {
-            currentCard = card
-            binding.textTitle.text = card.title
-            binding.textPrice.text = card.price
-            Glide.with(itemView)
-                .load(card.image)
-                .into(binding.imageUrl)
+            return time
         }
 
+        fun formatDate(dateTime: String): String {
+
+            try {
+//                val formatted: String
+
+                val instant = Instant.parse(dateTime)
+                val instantToday = Instant.now()
+
+
+                val localDateTime =
+                    LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
+                val localDateTimeToday =
+                    LocalDateTime.ofInstant(instantToday, ZoneOffset.UTC)
+
+                val dateActivity =
+                    DateTimeFormatter.ofPattern("dd MMMM yyyy").format(localDateTime)
+                val dateToday =
+                    DateTimeFormatter.ofPattern("dd MMMM yyyy").format(localDateTimeToday)
+
+                //val formatted = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(localDateTime)//ofPattern("MM-dd hh:mm").format(localDateTime)
+
+                return if (dateActivity.equals(dateToday))
+                    "Сгодня в ${DateTimeFormatter.ofPattern("HH:mm").format(localDateTime)}"
+                else
+                    DateTimeFormatter.ofPattern("dd MMMM yyyy в HH:mm").format(localDateTime)
+            } catch (e: Exception) {
+                return ""
+            }
+
+        }
+
+
     }
+
 }
- */

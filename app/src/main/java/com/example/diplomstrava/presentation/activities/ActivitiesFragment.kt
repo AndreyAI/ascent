@@ -32,6 +32,7 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
     private fun bindViewModel() {
         viewModel.activities.observe(viewLifecycleOwner) {
             activityAdapter.items = it
+            Timber.d(it.toString())
         }
     }
 
