@@ -1,14 +1,19 @@
 package com.example.diplomstrava.data
 
-import android.net.Network
-import com.example.diplomstrava.data.db.Database
-import com.example.diplomstrava.networking.Networking
+import android.content.Context
+import com.example.diplomstrava.data.db.ActivityDao
+import com.example.diplomstrava.networking.StravaApi
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
-import timber.log.Timber
+import javax.inject.Inject
 
-class RepositoryActivity {
+class RepositoryActivity @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val api: StravaApi,
+    private val activityDao: ActivityDao
+) {
 
-    private val activityDao = Database.instance.activityDao()
+   // private val activityDao = Database.instance.activityDao()
 
     fun getActivities(): Flow<List<Activity>> {
         return activityDao.getActivities()
@@ -36,7 +41,7 @@ class RepositoryActivity {
     }
 
     fun queryNewActivities(): List<Activity> {
-        val response = Networking.stravaApi.getActivities().execute()
+        val response = api.getActivities().execute()
         val activities = response.body() ?: emptyList()
         activityDao.insertActivities(activities)
         return activities

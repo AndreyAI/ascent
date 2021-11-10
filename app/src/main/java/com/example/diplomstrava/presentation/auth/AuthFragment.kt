@@ -1,5 +1,6 @@
 package com.example.diplomstrava.presentation.auth
 
+import android.app.Application
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.diplomstrava.App
 import com.example.diplomstrava.R
 import com.example.diplomstrava.databinding.FragmentLoginBinding
 import net.openid.appauth.AuthorizationException

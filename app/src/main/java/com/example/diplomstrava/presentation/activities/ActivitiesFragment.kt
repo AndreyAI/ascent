@@ -12,8 +12,10 @@ import com.example.diplomstrava.databinding.FragmentActivitiesBinding
 import com.example.diplomstrava.presentation.activities.adapter.ActivityListAdapter
 import com.example.diplomstrava.presentation.containerfragment.ContainerFragmentDirections
 import com.example.diplomstrava.utils.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
 
     private val binding by viewBinding(FragmentActivitiesBinding::bind)

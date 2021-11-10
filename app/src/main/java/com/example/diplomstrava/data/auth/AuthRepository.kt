@@ -1,7 +1,7 @@
 package com.example.diplomstrava.data.auth
 
 import android.net.Uri
-import com.example.diplomstrava.networking.Networking
+import com.example.diplomstrava.di.NetworkingModule
 import net.openid.appauth.*
 
 class AuthRepository {
@@ -34,7 +34,7 @@ class AuthRepository {
         authService.performTokenRequest(tokenRequest, getClientAuthentication()) { response, ex ->
             when {
                 response != null -> {
-                    Networking.accessToken = response.accessToken.orEmpty()
+                    NetworkingModule.accessToken = response.accessToken.orEmpty()
                     onComplete()
                 }
                 else -> onError()

@@ -113,11 +113,8 @@ class ActivityAdapterDelegate(
         fun formatDate(dateTime: String): String {
 
             try {
-//                val formatted: String
-
                 val instant = Instant.parse(dateTime)
                 val instantToday = Instant.now()
-
 
                 val localDateTime =
                     LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
@@ -128,8 +125,6 @@ class ActivityAdapterDelegate(
                     DateTimeFormatter.ofPattern("dd MMMM yyyy").format(localDateTime)
                 val dateToday =
                     DateTimeFormatter.ofPattern("dd MMMM yyyy").format(localDateTimeToday)
-
-                //val formatted = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(localDateTime)//ofPattern("MM-dd hh:mm").format(localDateTime)
 
                 return if (dateActivity.equals(dateToday))
                     "Сгодня в ${DateTimeFormatter.ofPattern("HH:mm").format(localDateTime)}"

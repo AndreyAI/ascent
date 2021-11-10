@@ -7,7 +7,9 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.diplomstrava.R
 import com.example.diplomstrava.databinding.FragmentAddActivityBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddActivityFragment : Fragment(R.layout.fragment_add_activity) {
 
     private val binding by viewBinding(FragmentAddActivityBinding::bind)

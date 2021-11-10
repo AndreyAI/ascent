@@ -4,13 +4,18 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.diplomstrava.data.RepositoryActivity
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
-class AddActivityViewModel : ViewModel() {
+@HiltViewModel
+class AddActivityViewModel@Inject constructor(
+    private val repository: RepositoryActivity
+) : ViewModel() {
 
-    private val repository = RepositoryActivity()
+    //private val repository = RepositoryActivity()
 
     fun saveActivity(
         name: String,
