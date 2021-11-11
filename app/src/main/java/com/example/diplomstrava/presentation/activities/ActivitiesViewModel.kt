@@ -1,8 +1,7 @@
 package com.example.diplomstrava.presentation.activities
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.diplomstrava.data.PersonWithActivity
 import com.example.diplomstrava.data.RepositoryActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -13,20 +12,22 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class ActivitiesViewModel@Inject constructor(
+class ActivitiesViewModel @Inject constructor(
     private val repository: RepositoryActivity
 ) : ViewModel() {
 
-    //private val repository = RepositoryActivity()
+    //val activities = repository.getActivities().asLiveData()
+    private val activitiesLiveData = MutableLiveData<List<PersonWithActivity>>()
 
-    val activities = repository.getActivities().asLiveData()
-
+    val activities: LiveData<List<PersonWithActivity>>
+        get() = activitiesLiveData
 
     fun bindViewModel() {
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                repository.queryNewActivities()
+                val activities = repository.queryNewActivities()
+                activitiesLiveData.postValue(activities)
             } catch (t: Throwable) {
                 Timber.e(t)
             }

@@ -15,6 +15,9 @@ data class Activity(
     @ColumnInfo(name = ActivityContract.Columns.ID)
     @Json(name = ActivityContract.Columns.ID)
     val id: Long,
+//    @ColumnInfo(name = ActivityContract.Columns.PERSON_ID)
+//    @Json(name = ActivityContract.Columns.PERSON_ID)
+//    val personId: Long,
     @ColumnInfo(name = ActivityContract.Columns.NAME)
     @Json(name = ActivityContract.Columns.NAME)
     val name: String,

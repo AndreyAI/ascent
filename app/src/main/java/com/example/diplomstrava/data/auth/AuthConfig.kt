@@ -16,7 +16,7 @@ object  AuthConfig {
     const val AUTH_URI = "https://www.strava.com/oauth/mobile/authorize"
     const val TOKEN_URI = "https://www.strava.com/oauth/token"
     const val RESPONSE_TYPE = ResponseTypeValues.CODE
-    const val SCOPE = "activity:write,activity:read"
+    const val SCOPE = "activity:write,activity:read_all,profile:read_all,profile:write"
     const val APPROVAL_PROMPT= "auto"
 
     const val CLIENT_ID = "73381"

@@ -1,6 +1,7 @@
 package com.example.diplomstrava.networking
 
 import com.example.diplomstrava.data.Activity
+import com.example.diplomstrava.data.Person
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -8,6 +9,9 @@ interface StravaApi {
 
     @GET("athlete/activities")
     fun getActivities(): Call<List<Activity>>
+
+    @GET("athlete")
+    fun getPersonData(): Call<Person>
 
 }
 

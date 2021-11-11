@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.diplomstrava.data.db.ActivityDao
 import com.example.diplomstrava.data.db.DatabaseStrava
+import com.example.diplomstrava.data.db.PersonDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,5 +31,10 @@ object DatabaseModule {
     @Provides
     fun provideActivityDao(databaseStrava: DatabaseStrava): ActivityDao {
         return databaseStrava.activityDao()
+    }
+
+    @Provides
+    fun providePersonDao(databaseStrava: DatabaseStrava): PersonDao {
+        return databaseStrava.personDao()
     }
 }

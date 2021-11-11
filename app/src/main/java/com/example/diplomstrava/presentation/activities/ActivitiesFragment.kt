@@ -9,6 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.diplomstrava.R
 import com.example.diplomstrava.data.Activity
 import com.example.diplomstrava.databinding.FragmentActivitiesBinding
+
 import com.example.diplomstrava.presentation.activities.adapter.ActivityListAdapter
 import com.example.diplomstrava.presentation.containerfragment.ContainerFragmentDirections
 import com.example.diplomstrava.utils.autoCleared
@@ -25,15 +26,19 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (savedInstanceState == null)
+            bindViewModel()
         initList()
         listenersInit()
-        bindViewModel()
+        //bindViewModel()
 
     }
 
     private fun bindViewModel() {
+        viewModel.bindViewModel()
         viewModel.activities.observe(viewLifecycleOwner) {
-            activityAdapter.items = it
+            if (it != null)
+                activityAdapter.items = it
             Timber.d(it.toString())
         }
     }
@@ -46,7 +51,7 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.refresh -> {
-                    viewModel.bindViewModel()
+                    //viewModel.bindViewModel()
 
                     true
                 }
@@ -56,10 +61,8 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
     }
 
     private fun initList() {
-        activityAdapter = ActivityListAdapter(
-            "andrey alyabev", "sdf"
-        ) {
-            shareActivity(it)
+        activityAdapter = ActivityListAdapter() {
+            //shareActivity(it.activities)
         }
         with(binding.listActivities) {
             adapter = activityAdapter

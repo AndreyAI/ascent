@@ -1,19 +1,18 @@
 package com.example.diplomstrava.data
 
-import android.content.Context
 import com.example.diplomstrava.data.db.ActivityDao
+import com.example.diplomstrava.data.db.PersonDao
 import com.example.diplomstrava.networking.StravaApi
-import dagger.hilt.android.qualifiers.ApplicationContext
+import com.example.diplomstrava.utils.ResponseBodyException
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.mapLatest
 import javax.inject.Inject
 
 class RepositoryActivity @Inject constructor(
-    @ApplicationContext private val context: Context,
     private val api: StravaApi,
-    private val activityDao: ActivityDao
+    private val activityDao: ActivityDao,
+    private val personDao: PersonDao
 ) {
-
-   // private val activityDao = Database.instance.activityDao()
 
     fun getActivities(): Flow<List<Activity>> {
         return activityDao.getActivities()
@@ -27,8 +26,10 @@ class RepositoryActivity @Inject constructor(
         distance: Double,
         description: String
     ) {
+
         val activity = Activity(
             id = 0L,
+            //personId = 8098,
             name = name,
             type = type,
             date = date,
@@ -40,11 +41,31 @@ class RepositoryActivity @Inject constructor(
         activityDao.insertActivities(listOf(activity))
     }
 
-    fun queryNewActivities(): List<Activity> {
-        val response = api.getActivities().execute()
-        val activities = response.body() ?: emptyList()
+    fun queryNewActivities(): List<PersonWithActivity> {
+        val responseActivities = api.getActivities().execute()
+        val activities = responseActivities.body() ?: throw(ResponseBodyException())
         activityDao.insertActivities(activities)
-        return activities
+        val responsePerson = api.getPersonData().execute()
+        val person = responsePerson.body() ?: throw(ResponseBodyException())
+        personDao.insertPerson(person)
+        return generatePersonWithActivity(person, activities)
+    }
+
+    private fun generatePersonWithActivity(
+        person: Person,
+        activities: List<Activity>
+    ): List<PersonWithActivity> {
+        val list = mutableListOf<PersonWithActivity>()
+        activities.forEach {
+            val personWithActivity = PersonWithActivity(
+                firstName = person.firstName,
+                lastName = person.lastName,
+                avatarUrl = person.avatarUrl,
+                activity = it
+            )
+            list.add(personWithActivity)
+        }
+        return list
     }
 
 }

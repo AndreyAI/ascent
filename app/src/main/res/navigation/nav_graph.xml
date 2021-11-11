@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/personFragment"
-        android:name="com.example.diplomstrava.presentation.PersonFragment"
+        android:name="com.example.diplomstrava.presentation.person.PersonFragment"
         android:label="PersonFragment"
         tools:layout="@layout/fragment_person"/>
     <fragment

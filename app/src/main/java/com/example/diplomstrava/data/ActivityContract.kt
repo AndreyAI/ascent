@@ -6,6 +6,7 @@ object ActivityContract {
 
     object Columns {
         const val ID = "id"
+        const val PERSON_ID = "athlete"
         const val NAME = "name"
         const val DISTANCE = "distance"
         const val TIME = "moving_time"

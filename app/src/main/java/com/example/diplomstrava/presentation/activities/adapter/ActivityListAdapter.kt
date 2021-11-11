@@ -1,25 +1,23 @@
 package com.example.diplomstrava.presentation.activities.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.diplomstrava.data.Activity
+import com.example.diplomstrava.data.PersonWithActivity
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 
 class ActivityListAdapter(
-    userName: String,
-    avatarUrl: String,
-    onShareActivity: (Activity) -> Unit
-) : AsyncListDifferDelegationAdapter<Activity>(ActivityDiffUtilCallback()) {
+    onShareActivity: (PersonWithActivity) -> Unit
+) : AsyncListDifferDelegationAdapter<PersonWithActivity>(ActivityDiffUtilCallback()) {
 
     init {
-        delegatesManager.addDelegate(ActivityAdapterDelegate(userName, avatarUrl, onShareActivity))
+        delegatesManager.addDelegate(ActivityAdapterDelegate(onShareActivity))
     }
 
-    class ActivityDiffUtilCallback : DiffUtil.ItemCallback<Activity>() {
-        override fun areItemsTheSame(oldItem: Activity, newItem: Activity): Boolean {
-            return oldItem.id == newItem.id
+    class ActivityDiffUtilCallback : DiffUtil.ItemCallback<PersonWithActivity>() {
+        override fun areItemsTheSame(oldItem: PersonWithActivity, newItem: PersonWithActivity): Boolean {
+            return oldItem.activity.id == newItem.activity.id
         }
 
-        override fun areContentsTheSame(oldItem: Activity, newItem: Activity): Boolean {
+        override fun areContentsTheSame(oldItem: PersonWithActivity, newItem: PersonWithActivity): Boolean {
             return oldItem == newItem
         }
     }

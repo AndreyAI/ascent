@@ -7,8 +7,9 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.diplomstrava.R
 import com.example.diplomstrava.databinding.FragmentContainerBinding
-import com.example.diplomstrava.presentation.PersonFragment
+import com.example.diplomstrava.presentation.person.PersonFragment
 import com.example.diplomstrava.presentation.activities.ActivitiesFragment
+import timber.log.Timber
 
 class ContainerFragment: Fragment(R.layout.fragment_container) {
 
@@ -21,7 +22,8 @@ class ContainerFragment: Fragment(R.layout.fragment_container) {
         if(savedInstanceState == null) viewModel.saveCurrentPos(HOME)
 
         viewModel.currentPage.observe(viewLifecycleOwner) {
-            fragmentInit(it)
+            //fragmentInit(it)
+            Timber.d(it)
         }
         listenersInit()
     }

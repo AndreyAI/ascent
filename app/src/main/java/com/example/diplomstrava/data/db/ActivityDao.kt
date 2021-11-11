@@ -16,5 +16,4 @@ interface ActivityDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertActivities(activities: List<Activity>)
 
-
 }
