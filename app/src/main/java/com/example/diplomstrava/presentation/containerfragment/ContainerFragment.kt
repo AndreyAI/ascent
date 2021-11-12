@@ -27,6 +27,7 @@ class ContainerFragment : Fragment(R.layout.fragment_container) {
         viewModel.currentPage.observe(viewLifecycleOwner) {
             fragmentInit(it)
         }
+
         listenersInit()
     }
 
@@ -35,12 +36,10 @@ class ContainerFragment : Fragment(R.layout.fragment_container) {
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navHome -> {
-                    fragmentInit(HOME)
                     viewModel.saveCurrentPos(HOME)
                     true
                 }
                 R.id.navList -> {
-                    fragmentInit(LIST)
                     viewModel.saveCurrentPos(LIST)
                     true
                 }
@@ -51,26 +50,43 @@ class ContainerFragment : Fragment(R.layout.fragment_container) {
 
     private fun fragmentInit(state: String) {
         when (state) {
-            HOME -> if (childFragmentManager.findFragmentByTag(HOME) !is PersonFragment) {
-                replaceFragment(
-                    PersonFragment(), HOME
+            HOME -> //if (childFragmentManager.findFragmentByTag(HOME) !is PersonFragment) {
+            {
+//                if (childFragmentManager.findFragmentByTag(HOME) != null) {
+//                    childFragmentManager.popBackStack(HOME, 0)
+//                    Timber.d(" pop home")
+//                } else
+                displayFragment(
+                    PersonFragment(), HOME, LIST
                 )
                 Timber.d("replace home")
+                // }
             }
-            LIST -> if (childFragmentManager.findFragmentByTag(LIST) !is ActivitiesFragment) {
-                replaceFragment(
-                    ActivitiesFragment(), LIST
+            LIST -> //if (childFragmentManager.findFragmentByTag(LIST) !is ActivitiesFragment) {
+            {
+//                if (childFragmentManager.findFragmentByTag(LIST) != null) {
+//                    childFragmentManager.popBackStack(LIST, 0)
+//                    Timber.d(" pop list")
+//                } else
+                displayFragment(
+                    ActivitiesFragment(), LIST, HOME
                 )
                 Timber.d("replace list")
+                // }
             }
         }
     }
 
 
-    private fun replaceFragment(fragment: Fragment, tag: String) {
-        childFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment, tag)
-            .commit()
+    private fun displayFragment(fragment: Fragment, tagShow: String?, tagHide: String?) {
+        val ft = childFragmentManager.beginTransaction()
+        if (childFragmentManager.findFragmentByTag(tagShow)?.isAdded == true)
+            ft.show(childFragmentManager.findFragmentByTag(tagShow)!!)
+        else
+            ft.add(R.id.fragmentContainer, fragment, tagShow)
+        if (childFragmentManager.findFragmentByTag(tagHide)?.isAdded == true)
+            ft.hide(childFragmentManager.findFragmentByTag(tagHide)!!)
+        ft.commit()
     }
 
     companion object {
