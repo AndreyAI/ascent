@@ -27,21 +27,19 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
         super.onViewCreated(view, savedInstanceState)
 
         if (savedInstanceState == null)
-            bindViewModel()
-        initList()
-        listenersInit()
-        //bindViewModel()
+            viewModel.bindViewModel()
 
-    }
-
-    private fun bindViewModel() {
-        viewModel.bindViewModel()
         viewModel.activities.observe(viewLifecycleOwner) {
             if (it != null)
                 activityAdapter.items = it
             Timber.d(it.toString())
         }
+        initList()
+        listenersInit()
+
+
     }
+
 
     private fun listenersInit() {
         binding.fabAdd.setOnClickListener {

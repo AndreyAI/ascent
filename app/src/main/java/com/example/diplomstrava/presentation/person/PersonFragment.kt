@@ -25,8 +25,10 @@ class PersonFragment : Fragment(R.layout.fragment_person) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (savedInstanceState == null)
+            viewModel.bindViewModel()
+
         initExposedMenu()
-        viewModel.bindViewModel()
         viewModel.person.observe(viewLifecycleOwner) {
             if (it != null) //first launch if db is empty
                 bindViewModel(it)

@@ -11,7 +11,7 @@ import com.example.diplomstrava.presentation.person.PersonFragment
 import com.example.diplomstrava.presentation.activities.ActivitiesFragment
 import timber.log.Timber
 
-class ContainerFragment: Fragment(R.layout.fragment_container) {
+class ContainerFragment : Fragment(R.layout.fragment_container) {
 
     private val binding by viewBinding(FragmentContainerBinding::bind)
     private val viewModel: ContainerFragmentViewModel by viewModels()
@@ -19,11 +19,13 @@ class ContainerFragment: Fragment(R.layout.fragment_container) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(savedInstanceState == null) viewModel.saveCurrentPos(HOME)
+        if (savedInstanceState == null) {
+            fragmentInit(HOME)
+            Timber.d("Init")
+        }
 
         viewModel.currentPage.observe(viewLifecycleOwner) {
-            //fragmentInit(it)
-            Timber.d(it)
+            fragmentInit(it)
         }
         listenersInit()
     }
@@ -33,15 +35,13 @@ class ContainerFragment: Fragment(R.layout.fragment_container) {
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navHome -> {
-                    replaceFragment(PersonFragment())
+                    fragmentInit(HOME)
                     viewModel.saveCurrentPos(HOME)
-                    //state = HOME
                     true
                 }
                 R.id.navList -> {
-                    replaceFragment(ActivitiesFragment())
+                    fragmentInit(LIST)
                     viewModel.saveCurrentPos(LIST)
-                    //state = LIST
                     true
                 }
                 else -> false
@@ -51,15 +51,25 @@ class ContainerFragment: Fragment(R.layout.fragment_container) {
 
     private fun fragmentInit(state: String) {
         when (state) {
-            HOME -> replaceFragment(PersonFragment())
-            LIST -> replaceFragment(ActivitiesFragment())
+            HOME -> if (childFragmentManager.findFragmentByTag(HOME) !is PersonFragment) {
+                replaceFragment(
+                    PersonFragment(), HOME
+                )
+                Timber.d("replace home")
+            }
+            LIST -> if (childFragmentManager.findFragmentByTag(LIST) !is ActivitiesFragment) {
+                replaceFragment(
+                    ActivitiesFragment(), LIST
+                )
+                Timber.d("replace list")
+            }
         }
     }
 
 
-    private fun replaceFragment(fragment: Fragment) {
+    private fun replaceFragment(fragment: Fragment, tag: String) {
         childFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment)
+            .replace(R.id.fragmentContainer, fragment, tag)
             .commit()
     }
 
