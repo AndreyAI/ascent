@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.diplomstrava.R
 import com.example.diplomstrava.data.auth.AuthRepository
+import com.example.diplomstrava.presentation.ScreenState
 import com.example.diplomstrava.utils.SingleLiveEvent
 import net.openid.appauth.AuthorizationException
 import net.openid.appauth.AuthorizationService
@@ -19,38 +20,31 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     private val authRepository = AuthRepository()
     private val authService: AuthorizationService = AuthorizationService(getApplication())
     private val openAuthPageLiveEvent = SingleLiveEvent<Intent>()
-    private val toastLiveEvent = SingleLiveEvent<Int>()
-    private val loadingMutableLiveData = MutableLiveData(false)
-    private val authSuccessLiveEvent = SingleLiveEvent<Unit>()
+    private val stateLiveData = MutableLiveData<ScreenState>(ScreenState.DefaultState)
+
+    val state: LiveData<ScreenState>
+        get() = stateLiveData
 
     val openAuthPageLiveData: LiveData<Intent>
         get() = openAuthPageLiveEvent
 
-    val loadingLiveData: LiveData<Boolean>
-        get() = loadingMutableLiveData
-
-    val toastLiveData: LiveData<Int>
-        get() = toastLiveEvent
-
-    val authSuccessLiveData: LiveData<Unit>
-        get() = authSuccessLiveEvent
 
     fun onAuthCodeFailed(exception: AuthorizationException) {
-        toastLiveEvent.postValue(R.string.auth_canceled)
+        stateLiveData.postValue(ScreenState.CancelState)
     }
 
     fun onAuthCodeReceived(tokenRequest: TokenRequest) {
-        loadingMutableLiveData.postValue(true)
+        stateLiveData.postValue(ScreenState.LoadingState)
         authRepository.performTokenRequest(
             authService = authService,
             tokenRequest = tokenRequest,
             onComplete = {
-                loadingMutableLiveData.postValue(false)
-                authSuccessLiveEvent.postValue(Unit)
+                stateLiveData.postValue(ScreenState.SuccessState)
+                //stateLiveData.postValue(ScreenState.DefaultState)
             },
             onError = {
-                loadingMutableLiveData.postValue(false)
-                toastLiveEvent.postValue(R.string.auth_canceled)
+                stateLiveData.postValue(ScreenState.ErrorState)
+                //stateLiveData.postValue(ScreenState.DefaultState)
             }
         )
     }
@@ -65,6 +59,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             customTabsIntent
         )
 
+        stateLiveData.postValue(ScreenState.LoadingState)
         openAuthPageLiveEvent.postValue(openAuthPageIntent)
     }
 
