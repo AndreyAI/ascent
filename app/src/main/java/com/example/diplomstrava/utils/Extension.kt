@@ -16,6 +16,8 @@ fun <T : Activity> T.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
+
+
 //fun meterToKm(merers: Double): String{
 //    return "${merers/1000.0} km"
 //}

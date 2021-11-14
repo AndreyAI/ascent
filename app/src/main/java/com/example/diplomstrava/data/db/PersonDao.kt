@@ -11,7 +11,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PersonDao {
     @Query("SELECT * FROM ${PersonContract.TABLE_NAME}")
-    fun getPerson(): Flow<Person?>
+    fun getPersonFlow(): Flow<Person?>
+
+    @Query("SELECT * FROM ${PersonContract.TABLE_NAME}")
+    fun getPerson(): Person
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPerson(person: Person)

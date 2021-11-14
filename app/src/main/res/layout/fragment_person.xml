@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentHome"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/fragmentHome">
+    android:layout_height="match_parent">
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -208,30 +208,44 @@
                         app:layout_constraintStart_toStartOf="@id/textCountry"
                         app:layout_constraintTop_toBottomOf="@id/textCountry" />
 
-
-                    <com.google.android.material.textfield.TextInputLayout
+                    <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinnerWeight"
-                        style="@style/dropDownMenu"
+                        style="@style/spinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:layout_marginStart="23dp"
                         android:layout_marginEnd="60dp"
                         android:layout_marginBottom="20dp"
                         app:endIconDrawable="@drawable/ic_arrow_dropdown"
                         app:endIconTint="@color/dark_gray"
-
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@id/textTitleWeight"
-                        app:layout_constraintTop_toBottomOf="@id/textTitleWeight"
-                        app:layout_constraintBottom_toBottomOf="parent">
+                        app:layout_constraintTop_toBottomOf="@id/textTitleWeight" />
 
-                        <AutoCompleteTextView
-                            android:id="@+id/textSpinner"
-                            style="@style/constraintPopMenu"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="none" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                    <!--                    <com.google.android.material.textfield.TextInputLayout-->
+                    <!--                        android:id="@+id/spinnerWeight"-->
+                    <!--                        style="@style/dropDownMenu"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginStart="23dp"-->
+                    <!--                        android:layout_marginEnd="60dp"-->
+                    <!--                        android:layout_marginBottom="20dp"-->
+                    <!--                        app:endIconDrawable="@drawable/ic_arrow_dropdown"-->
+                    <!--                        app:endIconTint="@color/dark_gray"-->
+                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--                        app:layout_constraintStart_toStartOf="@id/textTitleWeight"-->
+                    <!--                        app:layout_constraintTop_toBottomOf="@id/textTitleWeight">-->
+
+                    <!--                        <AutoCompleteTextView-->
+                    <!--                            android:id="@+id/textSpinner"-->
+                    <!--                            style="@style/constraintPopMenu"-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:inputType="none" />-->
+
+                    <!--                    </com.google.android.material.textfield.TextInputLayout>-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

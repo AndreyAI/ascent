@@ -36,8 +36,6 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
         }
         initList()
         listenersInit()
-
-
     }
 
 

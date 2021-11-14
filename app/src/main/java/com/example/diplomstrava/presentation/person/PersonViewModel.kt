@@ -13,12 +13,22 @@ class PersonViewModel @Inject constructor(
     private val repository: RepositoryPerson
 ) : ViewModel() {
 
-    val person = repository.getPerson().asLiveData()
+    val person = repository.getPersonFlow().asLiveData()
 
     fun bindViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 repository.queryPersonData()
+            } catch (t: Throwable) {
+                Timber.e(t)
+            }
+        }
+    }
+
+    fun updateWeight(weight: Double){
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                repository.updateWeight(weight)
             } catch (t: Throwable) {
                 Timber.e(t)
             }

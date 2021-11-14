@@ -2,8 +2,8 @@ package com.example.diplomstrava.presentation.person
 
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -14,9 +14,10 @@ import com.example.diplomstrava.data.Person
 import com.example.diplomstrava.databinding.FragmentPersonBinding
 import com.example.diplomstrava.utils.FormatData
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
-class PersonFragment : Fragment(R.layout.fragment_person) {
+class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSelectedListener {
 
     private val binding by viewBinding(FragmentPersonBinding::bind)
     private val viewModel: PersonViewModel by viewModels()
@@ -25,11 +26,12 @@ class PersonFragment : Fragment(R.layout.fragment_person) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (savedInstanceState == null)
-            viewModel.bindViewModel()
+        if (savedInstanceState == null) {
+            viewModel.bindViewModel()}
+            initExposedMenu()
 
-        initExposedMenu()
         viewModel.person.observe(viewLifecycleOwner) {
+            Timber.d(it.toString())
             if (it != null) //first launch if db is empty
                 bindViewModel(it)
         }
@@ -52,19 +54,34 @@ class PersonFragment : Fragment(R.layout.fragment_person) {
             else -> "Mail"
         }
         binding.textCountry.text = person.country
-        binding.textSpinner.setText(menuList[person.weight.toInt() - 10], false)
+        binding.spinnerWeight.setSelection(person.weight.toInt() - 10)
+      //  binding.spinnerWeight.adapter.getDropDownView(person.weight.toInt() - 10,  ,binding.root )
 
     }
 
     private fun initExposedMenu() {
-        val items = menuList
+        Timber.d("menuInit")
+        val items = generateWeightList()
         val adapter = ArrayAdapter(requireContext(), R.layout.item_exposed_menu, items)
-        (binding.spinnerWeight.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+        binding.spinnerWeight.adapter = adapter
+        binding.spinnerWeight.onItemSelectedListener = this
+
     }
 
     private fun generateWeightList(): List<String> {
         val list = mutableListOf<String>()
         (10..350).forEach { list.add("$it kg") }
         return list
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+        Timber.d(pos.toString())  //changeWeight in Room Person
+        viewModel.updateWeight(pos+10.0)
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>) {
+        // Another interface callback
     }
 }
