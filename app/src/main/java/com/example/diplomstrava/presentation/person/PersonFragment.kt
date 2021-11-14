@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -12,6 +13,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.example.diplomstrava.R
 import com.example.diplomstrava.data.Person
 import com.example.diplomstrava.databinding.FragmentPersonBinding
+import com.example.diplomstrava.presentation.ScreenState
 import com.example.diplomstrava.utils.FormatData
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -27,13 +29,17 @@ class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSel
         super.onViewCreated(view, savedInstanceState)
 
         if (savedInstanceState == null) {
-            viewModel.bindViewModel()}
-            initExposedMenu()
+            viewModel.bindViewModel()
+        }
+        initExposedMenu()
 
         viewModel.person.observe(viewLifecycleOwner) {
             Timber.d(it.toString())
             if (it != null) //first launch if db is empty
                 bindViewModel(it)
+        }
+        viewModel.state.observe(viewLifecycleOwner) {
+            updateView(it)
         }
 
     }
@@ -55,17 +61,42 @@ class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSel
         }
         binding.textCountry.text = person.country
         binding.spinnerWeight.setSelection(person.weight.toInt() - 10)
-      //  binding.spinnerWeight.adapter.getDropDownView(person.weight.toInt() - 10,  ,binding.root )
 
     }
 
     private fun initExposedMenu() {
         Timber.d("menuInit")
-        val items = generateWeightList()
+        val items = menuList
         val adapter = ArrayAdapter(requireContext(), R.layout.item_exposed_menu, items)
         binding.spinnerWeight.adapter = adapter
         binding.spinnerWeight.onItemSelectedListener = this
 
+    }
+
+    private fun updateView(state: ScreenState) {
+
+        when (state) {
+            is ScreenState.DefaultState -> {
+                defaultView(true)
+            }
+            is ScreenState.LoadingState -> {
+                defaultView(false)
+            }
+            is ScreenState.SuccessState -> {
+
+            }
+            is ScreenState.ErrorState -> {
+
+            }
+
+            else -> {}
+        }
+    }
+
+    private fun defaultView(visibility: Boolean) {
+        binding.containerMainView.visibility = if (visibility) View.VISIBLE
+        else View.INVISIBLE
+        binding.progressBar.isVisible = !visibility
     }
 
     private fun generateWeightList(): List<String> {
@@ -78,7 +109,7 @@ class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSel
         // An item was selected. You can retrieve the selected item using
         // parent.getItemAtPosition(pos)
         Timber.d(pos.toString())  //changeWeight in Room Person
-        viewModel.updateWeight(pos+10.0)
+        viewModel.updateWeight(pos + 10.0)
     }
 
     override fun onNothingSelected(parent: AdapterView<*>) {

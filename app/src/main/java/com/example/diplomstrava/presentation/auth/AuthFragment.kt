@@ -69,7 +69,6 @@ class AuthFragment : Fragment(R.layout.fragment_login) {
                defaultView(false)
             }
             is ScreenState.SuccessState -> {
-                toast("Successful")
                 findNavController().navigate(AuthFragmentDirections.actionLoginFragmentToContainerFragment())
             }
             is ScreenState.ErrorState -> {
