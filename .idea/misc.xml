@@ -26,6 +26,14 @@
         <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/drawable/ic_onboarding_ascent.xml" value="0.28125" />
         <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/drawable/ic_onboarding_friends.xml" value="0.21041666666666667" />
         <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/drawable/ic_onboarding_welcome.xml" value="0.21041666666666667" />
+        <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/drawable/ic_progress.xml" value="0.1859375" />
+        <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/drawable/ic_progress2.xml" value="0.20364583333333333" />
+        <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/drawable/ic_progress3.xml" value="0.20364583333333333" />
+        <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/drawable/ic_progress4.xml" value="0.20364583333333333" />
+        <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/drawable/ic_progress5.xml" value="0.20364583333333333" />
+        <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/drawable/ic_progress6.xml" value="0.20364583333333333" />
+        <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/drawable/ic_progress7.xml" value="0.20364583333333333" />
+        <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/drawable/ic_progress8.xml" value="0.20364583333333333" />
         <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/drawable/ic_rectangle_18.xml" value="0.22" />
         <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/drawable/ic_refresh.xml" value="0.15260416666666668" />
         <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/drawable/ic_share.xml" value="0.1859375" />
@@ -38,7 +46,7 @@
         <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/layout/fragment_login.xml" value="0.18" />
         <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/layout/fragment_logo.xml" value="0.184375" />
         <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/layout/fragment_onboarding.xml" value="0.14221014492753623" />
-        <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/layout/fragment_person.xml" value="0.33" />
+        <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/layout/fragment_person.xml" value="0.2" />
         <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/layout/fragment_share_list.xml" value="0.22" />
         <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/layout/item_activity.xml" value="0.4695121951219512" />
         <entry key="..\:/Users/User/Desktop/diplom/diplom_android_lvl1/app/src/main/res/layout/item_exposed_menu.xml" value="0.1703125" />

@@ -35,9 +35,11 @@
     </style>
 
     <style name="spinner" parent="Widget.AppCompat.Spinner">
-
-<!--        <item name="android:dropDownSelector">@drawable/ic_arrow_dropdown</item>-->
         <item name="android:background">@drawable/ic_spinner_background</item>
+    </style>
+
+    <style name="progress" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:indeterminateDrawable">@drawable/anim_progress</item>
     </style>
 
 
