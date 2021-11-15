@@ -2,6 +2,7 @@ package com.example.diplomstrava.presentation.activities
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,9 @@ import com.example.diplomstrava.presentation.containerfragment.ContainerFragment
 import com.example.diplomstrava.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import android.view.animation.LayoutAnimationController
+import com.example.diplomstrava.data.PersonWithActivity
+
 
 @AndroidEntryPoint
 class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
@@ -30,18 +34,39 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
             viewModel.bindViewModel()
 
         viewModel.activities.observe(viewLifecycleOwner) {
-            if (it != null)
-                activityAdapter.items = it
-            Timber.d(it.toString())
+            if (it != null) {
+                refreshList(it)
+            }
         }
+
         initList()
         listenersInit()
+    }
+
+    private fun refreshList(personWithActivities: List<PersonWithActivity>) {
+        val animationController: LayoutAnimationController =
+            AnimationUtils.loadLayoutAnimation(
+                requireContext(),
+                R.anim.layout_animation_recycler
+            )
+
+        binding.listActivities.layoutAnimation = animationController
+        binding.listActivities.layoutAnimation.start()
+        activityAdapter.items = personWithActivities
+        activityAdapter.notifyDataSetChanged()
+        Timber.d(personWithActivities.toString())
     }
 
 
     private fun listenersInit() {
         binding.fabAdd.setOnClickListener {
             addActivityNav()
+        }
+
+        binding.swipeRefresh.setOnRefreshListener {
+            Timber.d("swipe refresh")
+            viewModel.bindViewModel()
+            binding.swipeRefresh.isRefreshing = false
         }
 
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
@@ -58,11 +83,18 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
 
     private fun initList() {
         activityAdapter = ActivityListAdapter() {
-            //shareActivity(it.activities)
+
         }
         with(binding.listActivities) {
             adapter = activityAdapter
             setHasFixedSize(true)
+//            val animationController: LayoutAnimationController =
+//                AnimationUtils.loadLayoutAnimation(
+//                    requireContext(),
+//                    R.anim.layout_animation_recycler
+//                )
+//            layoutAnimation = animationController
+
         }
     }
 

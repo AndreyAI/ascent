@@ -79,6 +79,7 @@ dependencies {
     //RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.hannesdorfmann:adapterdelegates4:4.3.0'
+    implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
 
     //ViewPager
     implementation "androidx.viewpager2:viewpager2:1.0.0"

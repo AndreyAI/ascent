@@ -43,7 +43,6 @@ class AuthFragment : Fragment(R.layout.fragment_login) {
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             binding.imageLogo.isVisible = false
         }
-
         bindViewModel()
     }
 
@@ -66,7 +65,7 @@ class AuthFragment : Fragment(R.layout.fragment_login) {
                 defaultView(true)
             }
             is ScreenState.LoadingState -> {
-               defaultView(false)
+                defaultView(false)
             }
             is ScreenState.SuccessState -> {
                 findNavController().navigate(AuthFragmentDirections.actionLoginFragmentToContainerFragment())

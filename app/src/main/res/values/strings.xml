@@ -39,4 +39,5 @@
     <string name="elevation_gain">Elevation Gain</string>
     <string name="long_distance_running">long distance running</string>
     <string name="the_best_app_for_cyclists_and_runners">The best app for cyclists and runners!</string>
+    <string name="add_new_activity">Add new activity</string>
 </resources>
