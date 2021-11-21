@@ -42,10 +42,10 @@ class RepositoryActivity @Inject constructor(
     }
 
     fun queryNewActivities(): List<PersonWithActivity> {
-        val responseActivities = api.getActivities().execute()
+        val responseActivities = api.getActivities().execute() ?: throw(ResponseBodyException())
         val activities = responseActivities.body() ?: throw(ResponseBodyException())
         activityDao.insertActivities(activities)
-        val responsePerson = api.getPersonData().execute()
+        val responsePerson = api.getPersonData().execute() ?: throw(ResponseBodyException())
         val person = responsePerson.body() ?: throw(ResponseBodyException())
         personDao.insertPerson(person)
         return generatePersonWithActivity(person, activities)

@@ -86,7 +86,7 @@ class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSel
 
             }
             is ScreenState.ErrorState -> {
-
+                defaultView(false)
             }
 
             else -> {}

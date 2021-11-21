@@ -4,8 +4,11 @@ import androidx.lifecycle.*
 import com.example.diplomstrava.data.PersonWithActivity
 import com.example.diplomstrava.data.RepositoryActivity
 import com.example.diplomstrava.presentation.ScreenState
+import com.example.diplomstrava.utils.SingleLiveEvent
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -24,18 +27,31 @@ class ActivitiesViewModel @Inject constructor(
     private val stateLiveData = MutableLiveData<ScreenState>(ScreenState.LoadingState)
     val state: LiveData<ScreenState>
         get() = stateLiveData
+    private val stateSnackLiveData = SingleLiveEvent<Unit>()
+    val stateSnack: LiveData<Unit>
+        get() = stateSnackLiveData
 
-    fun bindViewModel() {
-
+    fun bindViewModel(isSwipe: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
+                if (isSwipe) stateLiveData.postValue(ScreenState.SwipeRefresh)
+                else stateLiveData.postValue(ScreenState.LoadingState)
                 val activities = repository.queryNewActivities()
                 activitiesLiveData.postValue(activities)
+                stateLiveData.postValue(ScreenState.DefaultState)
             } catch (t: Throwable) {
+                //stateLiveData.postValue(ScreenState.ErrorState)
+                stateSnackLiveData.postValue(Unit)
+                //stateLiveData.postValue(ScreenState.DefaultState)
                 Timber.e(t)
             }
         }
+    }
 
+    fun bindDefaultModel() {
+        viewModelScope.launch(Dispatchers.IO) {
+            stateLiveData.postValue(ScreenState.DefaultState)
+        }
     }
 }
 

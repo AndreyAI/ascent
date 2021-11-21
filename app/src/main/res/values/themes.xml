@@ -46,6 +46,10 @@
         <item name="android:indeterminateDrawable">@drawable/anim_progress</item>
     </style>
 
+    <style name="snackBar" parent="@style/Widget.MaterialComponents.Snackbar">
+        <item name="android:indeterminateDrawable">@drawable/anim_progress</item>
+    </style>
+
 
 
     <style name="inputTextAddActivity" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
