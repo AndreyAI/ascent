@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray_divider">#C4C4C4</color>
     <color name="dark_gray">#252525</color>
+    <color name="error_background">#F8E1E1</color>
+    <color name="error_text">#D84910</color>
 </resources>

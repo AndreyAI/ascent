@@ -6,5 +6,6 @@ sealed class ScreenState {
     object SwipeRefresh : ScreenState()
     object SuccessState : ScreenState()
     object ErrorState : ScreenState()
+    object EmptyListState : ScreenState()
     object CancelState : ScreenState()
 }

@@ -37,8 +37,12 @@ class ActivitiesViewModel @Inject constructor(
                 if (isSwipe) stateLiveData.postValue(ScreenState.SwipeRefresh)
                 else stateLiveData.postValue(ScreenState.LoadingState)
                 val activities = repository.queryNewActivities()
-                activitiesLiveData.postValue(activities)
-                stateLiveData.postValue(ScreenState.DefaultState)
+                if (activities.isNotEmpty()) {
+                    activitiesLiveData.postValue(activities)
+                    stateLiveData.postValue(ScreenState.DefaultState)
+                } else {
+                    stateLiveData.postValue(ScreenState.EmptyListState)
+                }
             } catch (t: Throwable) {
                 //stateLiveData.postValue(ScreenState.ErrorState)
                 stateSnackLiveData.postValue(Unit)

@@ -40,4 +40,6 @@
     <string name="long_distance_running">long distance running</string>
     <string name="the_best_app_for_cyclists_and_runners">The best app for cyclists and runners!</string>
     <string name="add_new_activity">Add new activity</string>
+    <string name="loaded_from_cash">"     Loaded feed from cache"</string>
+    <string name="activities_not_found">Activities not found</string>
 </resources>

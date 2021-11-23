@@ -20,6 +20,7 @@ import com.example.diplomstrava.presentation.ScreenState
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import android.view.Gravity
+import android.widget.TextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.isVisible
 import com.example.diplomstrava.R
@@ -32,7 +33,8 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
     private var activityAdapter: ActivityListAdapter by autoCleared()
     private val viewModel: ActivitiesViewModel by viewModels()
 
-    private var snackbar: Snackbar? = null
+    private var errorSnackbar: Snackbar? = null
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,8 +53,8 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
         }
 
         viewModel.stateSnack.observe(viewLifecycleOwner) {
-            if (snackbar?.isShown == false)
-                snackbar?.show()
+            if (errorSnackbar?.isShown == false)
+                errorSnackbar?.show()
         }
 
         initErrorSnack()
@@ -83,7 +85,6 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
             Timber.d("swipe refresh")
             viewModel.bindViewModel(true)
             binding.swipeRefresh.isRefreshing = false
-            //viewModel.bindDefaultModel()
         }
 
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
@@ -99,7 +100,7 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
     }
 
     private fun initList() {
-        activityAdapter = ActivityListAdapter() {
+        activityAdapter = ActivityListAdapter {
         }
         with(binding.listActivities) {
             adapter = activityAdapter
@@ -111,21 +112,24 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
 
         when (state) {
             is ScreenState.DefaultState -> {
-                refreshView(false, true, false)
+                refreshView(false, true, false, false)
             }
             is ScreenState.LoadingState -> {
-                refreshView(true, false, false)
+                refreshView(true, false, false, false)
             }
             is ScreenState.SuccessState -> {
 
             }
             is ScreenState.SwipeRefresh -> {
-                refreshView(false, true, true)
+                refreshView(false, true, true, false)
                 Timber.d("Swipe")
             }
             is ScreenState.ErrorState -> {
                 //refreshView(false, true, true)
                 Timber.d("error state")
+            }
+            is ScreenState.EmptyListState -> {
+                refreshView(false, true, true, true)
             }
             else -> {}
         }
@@ -134,18 +138,20 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
     private fun refreshView(
         progressLoading: Boolean,
         swipeContainer: Boolean,
-        progressSwipe: Boolean
+        progressSwipe: Boolean,
+        emptyList: Boolean
     ) {
         binding.progressBar.isVisible = progressLoading
         binding.swipeRefresh.isVisible = swipeContainer
         binding.containerSnack.isVisible = progressSwipe
+        binding.textEmptyList.isVisible = emptyList
     }
 
     private fun initErrorSnack() {
 
-        snackbar = Snackbar.make(
+        errorSnackbar = Snackbar.make(
             binding.containerSnack,
-            "Loaded feed from cache",
+            R.string.loaded_from_cash,
             Snackbar.LENGTH_SHORT
         )
             .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
@@ -159,19 +165,30 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
                 override fun onShown(transientBottomBar: Snackbar?) {
                     super.onShown(transientBottomBar)
                     binding.progressBarSwipe.isVisible = false
-                    Timber.d("show ${transientBottomBar}")
                 }
             })
 
-        val params = snackbar!!.view.layoutParams as CoordinatorLayout.LayoutParams
-        params.gravity = Gravity.TOP
-        params.topMargin = snackbar!!.view.height
+        val textView =
+            errorSnackbar!!.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_action)
+        textView.text = " " // clear the text to keep only the icon
+        textView.setCompoundDrawablesWithIntrinsicBounds(
+            0,
+            0,
+            R.drawable.ic_close,
+            0
+        )
 
-        snackbar!!.view.layoutParams = params
-        snackbar!!
-            .setAction("Повторить") {
-                snackbar!!.dismiss()
+        val params = errorSnackbar!!.view.layoutParams as CoordinatorLayout.LayoutParams
+        params.gravity = Gravity.TOP
+        params.topMargin = errorSnackbar!!.view.height
+
+        errorSnackbar!!.view.layoutParams = params
+
+        errorSnackbar!!
+            .setAction(" ") {
+                errorSnackbar!!.dismiss()
             }
+
     }
 
 
