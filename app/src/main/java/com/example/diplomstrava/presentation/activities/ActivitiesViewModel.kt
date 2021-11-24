@@ -45,7 +45,12 @@ class ActivitiesViewModel @Inject constructor(
                 }
             } catch (t: Throwable) {
                 //stateLiveData.postValue(ScreenState.ErrorState)
-                stateSnackLiveData.postValue(Unit)
+                val activities = repository.queryCachedActivities()
+                if (activities.isNotEmpty()) {
+                    activitiesLiveData.postValue(activities)
+                    stateLiveData.postValue(ScreenState.ErrorState)
+                    stateSnackLiveData.postValue(Unit)
+                }
                 //stateLiveData.postValue(ScreenState.DefaultState)
                 Timber.e(t)
             }

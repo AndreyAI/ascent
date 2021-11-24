@@ -125,7 +125,7 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
                 Timber.d("Swipe")
             }
             is ScreenState.ErrorState -> {
-                //refreshView(false, true, true)
+                refreshView(false, true, true, false)
                 Timber.d("error state")
             }
             is ScreenState.EmptyListState -> {

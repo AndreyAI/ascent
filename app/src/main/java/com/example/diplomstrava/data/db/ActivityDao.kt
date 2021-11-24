@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ActivityDao {
     @Query("SELECT * FROM ${ActivityContract.TABLE_NAME}")
-    fun getActivities(): Flow<List<Activity>>
+    fun getActivities(): List<Activity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertActivities(activities: List<Activity>)

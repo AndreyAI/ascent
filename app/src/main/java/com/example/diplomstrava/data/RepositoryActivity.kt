@@ -14,7 +14,7 @@ class RepositoryActivity @Inject constructor(
     private val personDao: PersonDao
 ) {
 
-    fun getActivities(): Flow<List<Activity>> {
+    fun getActivities(): List<Activity> {
         return activityDao.getActivities()
     }
 
@@ -48,6 +48,12 @@ class RepositoryActivity @Inject constructor(
         val responsePerson = api.getPersonData().execute() ?: throw(ResponseBodyException())
         val person = responsePerson.body() ?: throw(ResponseBodyException())
         personDao.insertPerson(person)
+        return generatePersonWithActivity(person, activities)
+    }
+
+    fun queryCachedActivities(): List<PersonWithActivity> {
+        val activities = activityDao.getActivities()
+        val person = personDao.getPerson()
         return generatePersonWithActivity(person, activities)
     }
 
