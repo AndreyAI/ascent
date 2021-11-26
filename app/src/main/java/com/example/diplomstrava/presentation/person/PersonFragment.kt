@@ -31,7 +31,7 @@ class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSel
         if (savedInstanceState == null) {
             viewModel.bindViewModel()
         }
-        initExposedMenu()
+        initWeightMenu()
 
         viewModel.person.observe(viewLifecycleOwner) {
             Timber.d(it.toString())
@@ -39,6 +39,7 @@ class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSel
                 bindViewModel(it)
         }
         viewModel.state.observe(viewLifecycleOwner) {
+            Timber.d(it.toString())
             updateView(it)
         }
 
@@ -61,11 +62,9 @@ class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSel
         }
         binding.textCountry.text = person.country
         binding.spinnerWeight.setSelection(person.weight.toInt() - 10)
-
     }
 
-    private fun initExposedMenu() {
-        Timber.d("menuInit")
+    private fun initWeightMenu() {
         val items = menuList
         val adapter = ArrayAdapter(requireContext(), R.layout.item_exposed_menu, items)
         binding.spinnerWeight.adapter = adapter
@@ -86,7 +85,7 @@ class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSel
 
             }
             is ScreenState.ErrorState -> {
-                defaultView(false)
+                defaultView(true)
             }
 
             else -> {}

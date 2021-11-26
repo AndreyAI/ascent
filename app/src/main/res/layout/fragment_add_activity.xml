@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/addFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/addFragment">
+    android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll"
@@ -51,29 +51,17 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+            <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinnerType"
-                style="@style/dropDownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="40dp"
-                android:hint="@string/type"
-                android:textColorHint="@color/dark_gray"
+                style="@style/spinner"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="20dp"
                 app:endIconDrawable="@drawable/ic_arrow_dropdown"
                 app:endIconTint="@color/dark_gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editName">
-
-                <AutoCompleteTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
+                app:layout_constraintEnd_toEndOf="@id/editName"
+                app:layout_constraintStart_toStartOf="@id/editName"
+                app:layout_constraintTop_toBottomOf="@id/editName" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/editDate"
