@@ -40,6 +40,7 @@ class RepositoryPerson @Inject constructor(
             weight = weight
         )
         personDao.insertPerson(personUpdated)
+        api.updatePerson(personUpdated).execute()
         Timber.d("person update")
 
     }
