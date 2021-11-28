@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import android.view.animation.LayoutAnimationController
 import com.example.diplomstrava.data.PersonWithActivity
-import com.example.diplomstrava.databinding.FragmentActivitiesBinding
+
 import com.example.diplomstrava.presentation.ScreenState
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -23,7 +23,9 @@ import android.view.Gravity
 import android.widget.TextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.RecyclerView
 import com.example.diplomstrava.R
+import com.example.diplomstrava.databinding.FragmentActivitiesBinding
 
 
 @AndroidEntryPoint
@@ -101,10 +103,19 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
 
     private fun initList() {
         activityAdapter = ActivityListAdapter {
+            Timber.d("CLICK")
         }
         with(binding.listActivities) {
-            adapter = activityAdapter
+            //adapter = activityAdapter
             setHasFixedSize(true)
+            activityAdapter.registerAdapterDataObserver(object :
+                RecyclerView.AdapterDataObserver() {
+                override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                    super.onItemRangeInserted(positionStart, itemCount)
+                    layoutManager?.scrollToPosition(0)
+                }
+            })
+            adapter = activityAdapter
         }
     }
 

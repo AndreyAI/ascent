@@ -73,8 +73,13 @@ class ActivityAdapterDelegate(
             binding.textTimeField.text = formatTime(activity.activity.time)
             binding.textElevationField.text = formatM(activity.activity.elevation) // or foot?
             binding.textActivityGroup.text = activity.activity.type
-            if (activity.activity.description == null) binding.textDescription.isVisible = false
-            else binding.textDescription.text = activity.activity.description
+            if (activity.activity.description.isNullOrEmpty()) {
+                binding.textDescription.isVisible =
+                    false
+            } else {
+                binding.textDescription.isVisible = true
+                binding.textDescription.text = activity.activity.description
+            }
 
         }
 

@@ -89,7 +89,7 @@ class RepositoryActivity @Inject constructor(
     }
 
     fun queryCachedActivities(): List<PersonWithActivity> {
-        val activities = activityDao.getActivities()
+        val activities = activityDao.getActivities()//.asReversed()
         val person = personDao.getPerson()
         return generatePersonWithActivity(person, activities)
     }

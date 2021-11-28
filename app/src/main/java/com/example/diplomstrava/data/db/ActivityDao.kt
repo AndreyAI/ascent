@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ActivityDao {
-    @Query("SELECT * FROM ${ActivityContract.TABLE_NAME}")
+    @Query("SELECT * FROM ${ActivityContract.TABLE_NAME} ORDER BY ${ActivityContract.Columns.ID} DESC")
     fun getActivities(): List<Activity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -1,5 +1,6 @@
 package com.example.diplomstrava.presentation.addactivity
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
@@ -22,11 +23,11 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class AddActivityFragment : Fragment(R.layout.fragment_add_activity),
-    AdapterView.OnItemSelectedListener, DurationDialog.SetText {
+    AdapterView.OnItemSelectedListener {
 
     private val binding by viewBinding(FragmentAddActivityBinding::bind)
     private val viewModel: AddActivityViewModel by viewModels()
-    var instant: Instant = Instant.now()
+    private var instant: Instant = Instant.now()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,15 +36,17 @@ class AddActivityFragment : Fragment(R.layout.fragment_add_activity),
         initTypeMenu()
 
         binding.buttonAdd.setOnClickListener {
-            viewModel.saveActivity(
-                name = binding.editNameInput.text.toString(),
-                type = binding.spinnerType.selectedItem.toString(), // after add type activity to spinner https://developers.strava.com/docs/reference/#api-models-ActivityType
-                date = instant.toString(),
-                time = binding.editTimeInput.text.toString(),
-                distance = binding.editDistanceInput.text.toString().toDouble(),
-                description = binding.editDescriptionInput.text.toString()
-            )
-            findNavController().popBackStack()
+            if (validateForm()) {
+                viewModel.saveActivity(
+                    name = binding.editNameInput.text.toString(),
+                    type = binding.spinnerType.selectedItem.toString(), // after add type activity to spinner https://developers.strava.com/docs/reference/#api-models-ActivityType
+                    date = instant.toString(),
+                    time = binding.editTimeInput.text.toString(),
+                    distance = binding.editDistanceInput.text.toString().toDouble(),
+                    description = binding.editDescriptionInput.text.toString()
+                )
+                findNavController().popBackStack()
+            }
         }
 
         binding.editDateInput.setOnClickListener {
@@ -118,8 +121,29 @@ class AddActivityFragment : Fragment(R.layout.fragment_add_activity),
             .show()
     }
 
-    override fun setText(text: String) {
-        binding.editTimeInput.setText(text)
+    @SuppressLint("ResourceAsColor")
+    private fun validateForm(): Boolean {
+        val isNameEmpty = binding.editNameInput.text.toString().isEmpty()
+        //val isTypeEmpty = binding.spinnerType.selectedItem.toString().isEmpty()
+        val isDateEmpty = binding.editDateInput.text.toString().isEmpty()
+        val isTimeEmpty = binding.editTimeInput.text.toString().isEmpty()
+        val isDistanceEmpty = binding.editDistanceInput.text.toString().isEmpty()
+        //val isDescriptionEmpty = binding.editDescriptionInput.text.toString().isEmpty()
+
+        if (isNameEmpty) binding.editName.error = "You need enter a name"
+        else binding.editName.error = null
+
+        if (isDateEmpty) binding.editDate.error = "You need choice a date"
+        else binding.editDate.error = null
+
+        if (isTimeEmpty) binding.editTime.error = "You need enter a time"
+        else binding.editTime.error = null
+
+        if (isDistanceEmpty) binding.editDistance.error = "You need enter a distance"
+        else binding.editDistance.error = null
+
+        return !isNameEmpty && !isDateEmpty && !isTimeEmpty && !isDistanceEmpty
+
     }
 
 }
