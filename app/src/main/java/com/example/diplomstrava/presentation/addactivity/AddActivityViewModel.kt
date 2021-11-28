@@ -21,7 +21,7 @@ class AddActivityViewModel@Inject constructor(
         name: String,
         type: String,
         date: String,
-        time: Long,
+        time: String,
         distance: Double,
         description: String
     ) {
@@ -37,7 +37,7 @@ class AddActivityViewModel@Inject constructor(
                 )
             } catch (t: Throwable) {
                 Timber.e(t, "user save error")
-
+                //repository.addWorkerTask()
             }
         }
     }

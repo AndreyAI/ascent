@@ -1,14 +1,19 @@
 package com.example.diplomstrava.data
 
+import android.content.Context
+import androidx.work.*
 import com.example.diplomstrava.data.db.ActivityDao
 import com.example.diplomstrava.data.db.PersonDao
 import com.example.diplomstrava.networking.StravaApi
+import com.example.diplomstrava.presentation.addactivity.PostActivityWorker
 import com.example.diplomstrava.utils.ResponseBodyException
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.mapLatest
+import dagger.hilt.android.qualifiers.ApplicationContext
+import timber.log.Timber
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class RepositoryActivity @Inject constructor(
+    @ApplicationContext private val  context: Context,
     private val api: StravaApi,
     private val activityDao: ActivityDao,
     private val personDao: PersonDao
@@ -22,23 +27,55 @@ class RepositoryActivity @Inject constructor(
         name: String,
         type: String,
         date: String,
-        time: Long,
+        time: String,
         distance: Double,
         description: String
     ) {
-
+        Timber.d(date)
         val activity = Activity(
             id = 0L,
-            //personId = 8098,
             name = name,
             type = type,
             date = date,
-            time = time,
+            time = time.toLong(),
             distance = distance,
             elevation = 0,
             description = description
         )
-        activityDao.insertActivities(listOf(activity))
+        try {
+            activityDao.insertActivities(listOf(activity))
+            api.postActivity(activity).execute() ?: throw(ResponseBodyException())
+        } catch (t: Throwable) {
+            addWorkerTask(activity)
+        }
+    }
+
+    private fun addWorkerTask(activity: Activity) {
+        Timber.d("create worker")
+
+        val workData = workDataOf(
+            ActivityContract.Columns.NAME to activity.name,
+            ActivityContract.Columns.TYPE to activity.type,
+            ActivityContract.Columns.DATE to activity.date,
+            ActivityContract.Columns.TIME to activity.time,
+            ActivityContract.Columns.DISTANCE to activity.distance,
+            ActivityContract.Columns.ELEVATION to activity.elevation,
+            ActivityContract.Columns.DESCRIPTION to activity.description
+        )
+
+        val workConstraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.NOT_ROAMING)
+            .build()
+
+        val workRequest = OneTimeWorkRequestBuilder<PostActivityWorker>()
+            .setInputData(workData)
+            .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.SECONDS)
+            .setConstraints(workConstraints)
+            .build()
+
+        WorkManager.getInstance(context)
+            .enqueueUniqueWork(DOWNLOAD_WORK_ID, ExistingWorkPolicy.APPEND, workRequest)
+
     }
 
     fun queryNewActivities(): List<PersonWithActivity> {
@@ -72,6 +109,10 @@ class RepositoryActivity @Inject constructor(
             list.add(personWithActivity)
         }
         return list
+    }
+
+    companion object {
+        private const val DOWNLOAD_WORK_ID = "download work"
     }
 
 }

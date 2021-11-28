@@ -31,6 +31,7 @@
     <string name="type">Type</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
+    <string name="timeMin">Time, min</string>
     <string name="distance">Distance</string>
     <string name="description">Description</string>
     <string name="add">Add</string>
@@ -42,4 +43,6 @@
     <string name="add_new_activity">Add new activity</string>
     <string name="loaded_from_cash">"     Loaded feed from cache"</string>
     <string name="activities_not_found">Activities not found</string>
+    <string name="hours">Hours</string>
+    <string name="minutes">Minutes</string>
 </resources>

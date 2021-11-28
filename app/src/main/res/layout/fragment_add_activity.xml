@@ -45,6 +45,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textHeadline">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editNameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName" />
@@ -74,8 +75,13 @@
                 app:layout_constraintTop_toBottomOf="@id/spinnerType">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editDateInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:inputType="date" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -85,12 +91,13 @@
                 style="@style/inputTextAddActivity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/time"
+                android:hint="@string/timeMin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/editDate">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTimeInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="time" />
@@ -108,6 +115,7 @@
                 app:layout_constraintTop_toBottomOf="@id/editTime">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editDistanceInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal" />
@@ -125,9 +133,10 @@
                 app:layout_constraintTop_toBottomOf="@id/editDistance">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editDescriptionInput"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
-                    android:inputType="numberDecimal" />
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

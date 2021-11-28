@@ -2,8 +2,12 @@ package com.example.diplomstrava.networking
 
 import com.example.diplomstrava.data.Activity
 import com.example.diplomstrava.data.Person
+import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 interface StravaApi {
 
@@ -12,6 +16,9 @@ interface StravaApi {
 
     @GET("athlete")
     fun getPersonData(): Call<Person>
+
+    @POST("activities")
+    fun postActivity(@Body activity: Activity): Call<ResponseBody>
 
 }
 
