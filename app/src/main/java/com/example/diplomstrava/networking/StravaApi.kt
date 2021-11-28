@@ -5,10 +5,7 @@ import com.example.diplomstrava.data.Person
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.PUT
+import retrofit2.http.*
 
 interface StravaApi {
 
@@ -23,6 +20,9 @@ interface StravaApi {
 
     @PUT("athlete")
     fun updatePerson(@Body person: Person): Call<ResponseBody>
+
+    @POST
+    fun logout(@Url url: String): Call<ResponseBody>
 
 }
 

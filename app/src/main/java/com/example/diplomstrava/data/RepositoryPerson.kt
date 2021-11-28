@@ -4,6 +4,7 @@ import com.example.diplomstrava.data.db.PersonDao
 import com.example.diplomstrava.networking.StravaApi
 import com.example.diplomstrava.utils.ResponseBodyException
 import kotlinx.coroutines.flow.*
+import retrofit2.http.Url
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -42,7 +43,10 @@ class RepositoryPerson @Inject constructor(
         personDao.insertPerson(personUpdated)
         api.updatePerson(personUpdated).execute()
         Timber.d("person update")
+    }
 
+    fun logout(){
+        api.logout("https://www.strava.com/oauth/deauthorize").execute()
     }
 
 }

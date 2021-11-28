@@ -29,7 +29,6 @@ class AddActivityFragment : Fragment(R.layout.fragment_add_activity),
     private val viewModel: AddActivityViewModel by viewModels()
     private var instant: Instant = Instant.now()
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

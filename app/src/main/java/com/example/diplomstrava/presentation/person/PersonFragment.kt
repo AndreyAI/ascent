@@ -43,6 +43,10 @@ class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSel
             updateView(it)
         }
 
+        binding.buttonLogout.setOnClickListener {
+            viewModel.logout()
+        }
+
     }
 
     private fun bindViewModel(person: Person) {

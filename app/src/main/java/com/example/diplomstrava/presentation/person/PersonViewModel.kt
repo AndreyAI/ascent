@@ -44,4 +44,14 @@ class PersonViewModel @Inject constructor(
             }
         }
     }
+
+    fun logout(){
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                repository.logout()
+            } catch (t: Throwable) {
+                Timber.e(t)
+            }
+        }
+    }
 }
