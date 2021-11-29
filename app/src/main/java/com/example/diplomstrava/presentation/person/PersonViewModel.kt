@@ -1,6 +1,8 @@
 package com.example.diplomstrava.presentation.person
 
 import androidx.lifecycle.*
+import com.example.diplomstrava.data.Person
+import com.example.diplomstrava.data.PersonWithActivity
 import com.example.diplomstrava.data.RepositoryPerson
 import com.example.diplomstrava.presentation.ScreenState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +16,12 @@ class PersonViewModel @Inject constructor(
     private val repository: RepositoryPerson
 ) : ViewModel() {
 
-    val person = repository.getPersonFlow().asLiveData()
+    //val person = repository.getPersonFlow().asLiveData()
+
+    private val personLiveData = MutableLiveData<Person>()
+
+    val person: LiveData<Person>
+        get() = personLiveData
 
     private val stateLiveData = MutableLiveData<ScreenState>(ScreenState.LoadingState)
 
@@ -25,7 +32,8 @@ class PersonViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 stateLiveData.postValue(ScreenState.LoadingState)
-                repository.queryPersonData()
+                val person = repository.queryPersonData()
+                personLiveData.postValue(person)
                 stateLiveData.postValue(ScreenState.DefaultState)
             } catch (t: Throwable) {
                 stateLiveData.postValue(ScreenState.ErrorState)

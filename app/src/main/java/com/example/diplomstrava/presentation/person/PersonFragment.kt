@@ -55,11 +55,6 @@ class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSel
     }
 
     private fun bindViewModel(person: Person) {
-        Glide.with(binding.imageAvatar)
-            .load(person.avatarUrl)
-            .transform(CircleCrop())
-            .placeholder(R.drawable.ic_account)
-            .into(binding.imageAvatar)
 
         binding.textName.text = "${person.firstName} ${person.lastName}"
         binding.textMail.text = FormatData.formatDate(person.lastUpdate)
@@ -71,6 +66,12 @@ class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSel
         }
         binding.textCountry.text = person.country
         binding.spinnerWeight.setSelection(person.weight.toInt() - 10)
+
+        Glide.with(binding.imageAvatar)
+            .load(person.avatarUrl)
+            .transform(CircleCrop())
+            .placeholder(R.drawable.ic_account)
+            .into(binding.imageAvatar)
     }
 
     private fun initWeightMenu() {
@@ -106,8 +107,9 @@ class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSel
     }
 
     private fun defaultView(visibility: Boolean) {
-        binding.containerMainView.visibility = if (visibility) View.VISIBLE
-        else View.INVISIBLE
+//        binding.containerMainView.visibility = if (visibility) View.VISIBLE
+//        else View.INVISIBLE
+        binding.containerMainView.isVisible = visibility
         binding.progressBar.isVisible = !visibility
     }
 
