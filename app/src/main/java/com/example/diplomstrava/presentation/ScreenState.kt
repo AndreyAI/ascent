@@ -8,4 +8,5 @@ sealed class ScreenState {
     object ErrorState : ScreenState()
     object EmptyListState : ScreenState()
     object CancelState : ScreenState()
+    object LogoutState : ScreenState()
 }

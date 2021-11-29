@@ -7,6 +7,7 @@ import androidx.room.Query
 import com.example.diplomstrava.data.Person
 import com.example.diplomstrava.data.PersonContract
 import kotlinx.coroutines.flow.Flow
+import retrofit2.http.DELETE
 
 @Dao
 interface PersonDao {
@@ -18,5 +19,8 @@ interface PersonDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPerson(person: Person)
+
+    @Query("DELETE FROM ${PersonContract.TABLE_NAME}")
+    fun deletePerson()
 
 }

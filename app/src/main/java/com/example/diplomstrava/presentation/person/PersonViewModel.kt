@@ -45,11 +45,15 @@ class PersonViewModel @Inject constructor(
         }
     }
 
+
+
     fun logout(){
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 repository.logout()
+                stateLiveData.postValue(ScreenState.LogoutState)
             } catch (t: Throwable) {
+
                 Timber.e(t)
             }
         }

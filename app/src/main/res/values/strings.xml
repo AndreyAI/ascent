@@ -45,4 +45,7 @@
     <string name="activities_not_found">Activities not found</string>
     <string name="hours">Hours</string>
     <string name="minutes">Minutes</string>
+    <string name="logout_question">Are you sure you want to logout? All local data will be deleted.</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
 </resources>

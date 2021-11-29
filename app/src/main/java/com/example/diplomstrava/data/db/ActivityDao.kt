@@ -16,4 +16,7 @@ interface ActivityDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertActivities(activities: List<Activity>)
 
+    @Query("DELETE FROM ${ActivityContract.TABLE_NAME}")
+    fun deleteActivities()
+
 }

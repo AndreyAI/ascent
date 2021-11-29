@@ -1,16 +1,21 @@
 package com.example.diplomstrava.data
 
+import android.content.Context
+import androidx.work.WorkManager
+import com.example.diplomstrava.data.db.ActivityDao
 import com.example.diplomstrava.data.db.PersonDao
 import com.example.diplomstrava.networking.StravaApi
 import com.example.diplomstrava.utils.ResponseBodyException
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.*
-import retrofit2.http.Url
 import timber.log.Timber
 import javax.inject.Inject
 
 class RepositoryPerson @Inject constructor(
+    @ApplicationContext private val  context: Context,
     private val api: StravaApi,
-    private val personDao: PersonDao
+    private val personDao: PersonDao,
+    private val activityDao: ActivityDao
 ) {
     fun getPersonFlow(): Flow<Person?> {
         return personDao.getPersonFlow()
@@ -46,7 +51,13 @@ class RepositoryPerson @Inject constructor(
     }
 
     fun logout(){
+        personDao.deletePerson()
+        activityDao.deleteActivities()
+        WorkManager.getInstance(context).cancelAllWork()
         api.logout("https://www.strava.com/oauth/deauthorize").execute()
     }
+
+
+
 
 }
