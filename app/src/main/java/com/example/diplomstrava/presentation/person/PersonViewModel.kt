@@ -2,9 +2,9 @@ package com.example.diplomstrava.presentation.person
 
 import androidx.lifecycle.*
 import com.example.diplomstrava.data.Person
-import com.example.diplomstrava.data.PersonWithActivity
 import com.example.diplomstrava.data.RepositoryPerson
 import com.example.diplomstrava.presentation.ScreenState
+import com.example.diplomstrava.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,15 +18,17 @@ class PersonViewModel @Inject constructor(
 
     //val person = repository.getPersonFlow().asLiveData()
 
-    private val personLiveData = MutableLiveData<Person>()
-
-    val person: LiveData<Person>
+    private val personLiveData = MutableLiveData<Person?>()
+    val person: LiveData<Person?>
         get() = personLiveData
 
     private val stateLiveData = MutableLiveData<ScreenState>(ScreenState.LoadingState)
-
     val state: LiveData<ScreenState>
         get() = stateLiveData
+
+    private val toastLiveData = SingleLiveEvent<Unit>()
+    val toast: LiveData<Unit>
+        get() = toastLiveData
 
     fun bindViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -42,7 +44,7 @@ class PersonViewModel @Inject constructor(
         }
     }
 
-    fun updateWeight(weight: Double){
+    fun updateWeight(weight: Double) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 repository.updateWeight(weight)
@@ -54,15 +56,14 @@ class PersonViewModel @Inject constructor(
     }
 
 
-
-    fun logout(){
+    fun logout() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 repository.logout()
                 stateLiveData.postValue(ScreenState.LogoutState)
             } catch (t: Throwable) {
-
                 Timber.e(t)
+                toastLiveData.postValue(Unit)
             }
         }
     }

@@ -74,7 +74,7 @@ class RepositoryActivity @Inject constructor(
             .build()
 
         WorkManager.getInstance(context)
-            .enqueueUniqueWork(DOWNLOAD_WORK_ID, ExistingWorkPolicy.APPEND, workRequest)
+            .enqueueUniqueWork(DOWNLOAD_WORK_ID, ExistingWorkPolicy.APPEND_OR_REPLACE, workRequest)
 
     }
 
@@ -112,7 +112,7 @@ class RepositoryActivity @Inject constructor(
     }
 
     companion object {
-        private const val DOWNLOAD_WORK_ID = "download work"
+        const val DOWNLOAD_WORK_ID = "download work"
     }
 
 }

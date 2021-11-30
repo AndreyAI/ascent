@@ -48,4 +48,7 @@
     <string name="logout_question">Are you sure you want to logout? All local data will be deleted.</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
+    <string name="exit_question">Exit?</string>
+    <string name="cancel">Cancel</string>
+    <string name="exit">Exit</string>
 </resources>

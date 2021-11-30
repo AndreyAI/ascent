@@ -140,7 +140,7 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
                 Timber.d("error state")
             }
             is ScreenState.EmptyListState -> {
-                refreshView(false, true, true, true)
+                refreshView(false, true, false, true)
             }
             else -> {}
         }

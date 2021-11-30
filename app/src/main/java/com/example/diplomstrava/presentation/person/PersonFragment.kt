@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -37,7 +38,7 @@ class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSel
         initWeightMenu()
 
         viewModel.person.observe(viewLifecycleOwner) {
-            Timber.d("PERSON ${it.toString()}")
+            //Timber.d("PERSON ${it.toString()}")
             if (it != null) //first launch if db is empty
                 bindViewModel(it)
         }
@@ -46,8 +47,11 @@ class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSel
             updateView(it)
         }
 
+        viewModel.toast.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), "No connection", Toast.LENGTH_LONG).show()
+        }
+
         binding.buttonLogout.setOnClickListener {
-            //viewModel.logout()
             LogoutDialog()
                 .show(childFragmentManager, "Duration")
         }
@@ -107,8 +111,6 @@ class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSel
     }
 
     private fun defaultView(visibility: Boolean) {
-//        binding.containerMainView.visibility = if (visibility) View.VISIBLE
-//        else View.INVISIBLE
         binding.containerMainView.isVisible = visibility
         binding.progressBar.isVisible = !visibility
     }
@@ -133,4 +135,6 @@ class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSel
     override fun logout() {
         viewModel.logout()
     }
+
+
 }

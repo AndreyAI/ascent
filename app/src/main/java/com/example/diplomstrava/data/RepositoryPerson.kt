@@ -12,7 +12,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class RepositoryPerson @Inject constructor(
-    @ApplicationContext private val  context: Context,
+    @ApplicationContext private val context: Context,
     private val api: StravaApi,
     private val personDao: PersonDao,
     private val activityDao: ActivityDao
@@ -21,12 +21,16 @@ class RepositoryPerson @Inject constructor(
         return personDao.getPersonFlow()
     }
 
-    fun queryPersonData(): Person {
+    fun queryPersonData(): Person? {
+
         val response = api.getPersonData().execute()
         val person = response.body()
-            ?: throw(ResponseBodyException())//emptyList()//throw(ResponseBodyException())
-        personDao.insertPerson(person)
+        //?: throw(ResponseBodyException())//emptyList()//throw(ResponseBodyException())
+        if (person != null) {
+            personDao.insertPerson(person)
+        }
         return person
+
     }
 
     fun updateWeight(weight: Double) {
@@ -50,14 +54,12 @@ class RepositoryPerson @Inject constructor(
         Timber.d("person update")
     }
 
-    fun logout(){
+    fun logout() {
         personDao.deletePerson()
         activityDao.deleteActivities()
-        WorkManager.getInstance(context).cancelAllWork()
+        WorkManager.getInstance(context).cancelUniqueWork(RepositoryActivity.DOWNLOAD_WORK_ID)
         api.logout("https://www.strava.com/oauth/deauthorize").execute()
     }
-
-
 
 
 }

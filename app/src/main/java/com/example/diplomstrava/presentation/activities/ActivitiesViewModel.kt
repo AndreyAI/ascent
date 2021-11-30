@@ -20,13 +20,13 @@ class ActivitiesViewModel @Inject constructor(
 
     //val activities = repository.getActivities().asLiveData()
     private val activitiesLiveData = MutableLiveData<List<PersonWithActivity>>()
-
     val activities: LiveData<List<PersonWithActivity>>
         get() = activitiesLiveData
 
     private val stateLiveData = MutableLiveData<ScreenState>(ScreenState.LoadingState)
     val state: LiveData<ScreenState>
         get() = stateLiveData
+
     private val stateSnackLiveData = SingleLiveEvent<Unit>()
     val stateSnack: LiveData<Unit>
         get() = stateSnackLiveData
@@ -50,7 +50,8 @@ class ActivitiesViewModel @Inject constructor(
                     activitiesLiveData.postValue(activities)
                     stateLiveData.postValue(ScreenState.ErrorState)
                     stateSnackLiveData.postValue(Unit)
-                }
+                } else
+                    stateLiveData.postValue(ScreenState.EmptyListState)
                 //stateLiveData.postValue(ScreenState.DefaultState)
                 Timber.e(t)
             }
