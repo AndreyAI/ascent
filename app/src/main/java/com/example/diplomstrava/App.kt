@@ -1,8 +1,10 @@
 package com.example.diplomstrava
 
 import android.app.Application
+import android.app.NotificationChannel
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
+import com.example.diplomstrava.presentation.NotificationChanel
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
@@ -19,6 +21,7 @@ class App : Application(), Configuration.Provider {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
         AndroidThreeTen.init(this)
+        NotificationChanel.create(this)
     }
 
     override fun getWorkManagerConfiguration(): Configuration {

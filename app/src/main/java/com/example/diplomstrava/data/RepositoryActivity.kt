@@ -9,6 +9,7 @@ import com.example.diplomstrava.presentation.addactivity.PostActivityWorker
 import com.example.diplomstrava.utils.ResponseBodyException
 import dagger.hilt.android.qualifiers.ApplicationContext
 import timber.log.Timber
+import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -45,6 +46,9 @@ class RepositoryActivity @Inject constructor(
         try {
             activityDao.insertActivities(listOf(activity))
             api.postActivity(activity).execute() ?: throw(ResponseBodyException())
+            activityDao.insertLastActivityFromApp(
+                LastActivityFromApp(id = 1L, Calendar.getInstance().timeInMillis)
+            )
         } catch (t: Throwable) {
             addWorkerTask(activity)
         }
@@ -109,6 +113,11 @@ class RepositoryActivity @Inject constructor(
             list.add(personWithActivity)
         }
         return list
+    }
+
+    private fun setMomentLastAddedActivity(){
+        val momentAdd = Calendar.getInstance().timeInMillis
+
     }
 
     companion object {

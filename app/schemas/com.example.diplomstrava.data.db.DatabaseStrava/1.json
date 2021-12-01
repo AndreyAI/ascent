@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "f19dc773529274f8e1397de1f7134ba0",
+    "identityHash": "524c18180f77b60c65bda5bc26f2c4b5",
     "entities": [
       {
         "tableName": "activities",
@@ -139,12 +139,38 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "LastActivityFromApp",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `time_stamp` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timeStamp",
+            "columnName": "time_stamp",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f19dc773529274f8e1397de1f7134ba0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '524c18180f77b60c65bda5bc26f2c4b5')"
     ]
   }
 }
