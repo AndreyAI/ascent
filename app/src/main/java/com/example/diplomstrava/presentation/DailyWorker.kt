@@ -5,12 +5,10 @@ import android.media.RingtoneManager
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.hilt.work.HiltWorker
-import androidx.work.CoroutineWorker
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.WorkerParameters
+import androidx.work.*
 import com.example.diplomstrava.R
 import com.example.diplomstrava.data.db.ActivityDao
+import com.example.diplomstrava.presentation.main.MainActivity
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import timber.log.Timber
@@ -23,8 +21,9 @@ class DailyWorker @AssistedInject constructor(
     @Assisted params: WorkerParameters,
     private val activityDao: ActivityDao
 ) : CoroutineWorker(context, params) {
+
     override suspend fun doWork(): Result {
-        // Toast.makeText(applicationContext, "HIIII", Toast.LENGTH_LONG).show()
+
         val lastActivity = activityDao.getLastActivityFromApp().first().timeStamp
         val currentDate = Calendar.getInstance()
 
@@ -40,28 +39,32 @@ class DailyWorker @AssistedInject constructor(
             showNotification()
             Timber.d("HAHAHAHAHAHA")
         }
+
         if (dueDate.before(currentDate)) {
             dueDate.add(Calendar.HOUR_OF_DAY, 24)
         }
-        timeDiff = dueDate.timeInMillis - currentDate.timeInMillis // between setpoint and now (calculate offset delay time)
+
+        timeDiff =
+            dueDate.timeInMillis - currentDate.timeInMillis // between setpoint and now (calculate offset delay time)
+
         val dailyWorkRequest = OneTimeWorkRequestBuilder<DailyWorker>()
             .setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
-            //.addTag(TAG_OUTPUT)
+            .addTag(MainActivity.NOTIFY_WORK_ID)
             .build()
 
         WorkManager.getInstance(applicationContext)
-            .enqueue(dailyWorkRequest)
+            .enqueue(
+                dailyWorkRequest
+            )
         return Result.success()
     }
 
     private fun showNotification() {
 
-        // val largeIcon = BitmapFactory.decodeResource(resources, R.drawable.grapefruit)
-
         val notification =
             NotificationCompat.Builder(applicationContext, NotificationChanel.CHANNEL_ID)
-                .setContentTitle("You have a new message")
-                .setContentText("Message text from time ${System.currentTimeMillis()}")
+                .setContentTitle(applicationContext.getString(R.string.training_time))
+                .setContentText(applicationContext.getString(R.string.notify_text))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setVibrate(longArrayOf(100, 200, 500, 500))
@@ -71,7 +74,6 @@ class DailyWorker @AssistedInject constructor(
 
         NotificationManagerCompat.from(applicationContext)
             .notify(NOTIFICATION_ID, notification)
-
 
     }
 

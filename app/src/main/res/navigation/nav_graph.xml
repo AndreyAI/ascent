@@ -48,6 +48,9 @@
         <action
             android:id="@+id/action_containerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_containerFragment_to_shareListFragment"
+            app:destination="@id/shareListFragment" />
     </fragment>
     <fragment
         android:id="@+id/activitiesFragment"
@@ -59,4 +62,9 @@
         android:name="com.example.diplomstrava.presentation.addactivity.AddActivityFragment"
         android:label="AddActivityFragment"
         tools:layout="@layout/fragment_add_activity"/>
+    <fragment
+        android:id="@+id/shareListFragment"
+        android:name="com.example.diplomstrava.presentation.share.ShareListFragment"
+        android:label="ShareListFragment"
+        tools:layout="@layout/fragment_share_list"/>
 </navigation>

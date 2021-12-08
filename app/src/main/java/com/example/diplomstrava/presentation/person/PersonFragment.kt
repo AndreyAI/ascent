@@ -56,6 +56,10 @@ class PersonFragment : Fragment(R.layout.fragment_person), AdapterView.OnItemSel
                 .show(childFragmentManager, "Duration")
         }
 
+        binding.buttonShare.setOnClickListener {
+            findNavController().navigate(ContainerFragmentDirections.actionContainerFragmentToShareListFragment())
+        }
+
     }
 
     private fun bindViewModel(person: Person) {

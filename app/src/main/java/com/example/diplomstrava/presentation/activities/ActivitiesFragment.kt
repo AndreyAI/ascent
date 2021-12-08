@@ -179,15 +179,25 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
                 }
             })
 
-        val textView =
+        val textViewButton =
             errorSnackbar!!.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_action)
-        textView.text = " " // clear the text to keep only the icon
-        textView.setCompoundDrawablesWithIntrinsicBounds(
+        textViewButton.text = " " // clear the text to keep only the icon
+        textViewButton.setCompoundDrawablesWithIntrinsicBounds(
             0,
             0,
             R.drawable.ic_close,
             0
         )
+
+        val textView =
+            errorSnackbar!!.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+        textView.setCompoundDrawablesWithIntrinsicBounds(
+            R.drawable.ic_alarm,
+            0,
+            0,
+            0
+        )
+
 
         val params = errorSnackbar!!.view.layoutParams as CoordinatorLayout.LayoutParams
         params.gravity = Gravity.TOP

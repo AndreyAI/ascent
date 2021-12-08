@@ -9,8 +9,9 @@ import com.example.diplomstrava.R
 import com.example.diplomstrava.databinding.ActivityMainBinding
 import com.example.diplomstrava.presentation.DailyWorker
 import com.example.diplomstrava.presentation.addactivity.AddActivityFragment
-import com.example.diplomstrava.presentation.person.LogoutDialog
+import com.example.diplomstrava.presentation.share.ShareListFragment
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -27,7 +28,9 @@ class MainActivity : AppCompatActivity(), ExitDialog.Exit {
 
     override fun onBackPressed() {
         val navHost = supportFragmentManager.findFragmentById(R.id.fragment)
-        if (navHost?.childFragmentManager?.fragments?.get(0) is AddActivityFragment)
+        if (navHost?.childFragmentManager?.fragments?.get(0) is AddActivityFragment ||
+            navHost?.childFragmentManager?.fragments?.get(0) is ShareListFragment
+        )
             super.onBackPressed()
         else {
             navHost?.childFragmentManager?.let {
@@ -36,6 +39,21 @@ class MainActivity : AppCompatActivity(), ExitDialog.Exit {
             }
         }
     }
+
+    /*
+            val workConstraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.NOT_ROAMING)
+            .build()
+
+        val workRequest = OneTimeWorkRequestBuilder<PostActivityWorker>()
+            .setInputData(workData)
+            .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.SECONDS)
+            .setConstraints(workConstraints)
+            .build()
+
+        WorkManager.getInstance(context)
+            .enqueueUniqueWork(DOWNLOAD_WORK_ID, ExistingWorkPolicy.APPEND_OR_REPLACE, workRequest)
+     */
 
     private fun initNotify() {
         val currentDate = Calendar.getInstance()
@@ -48,16 +66,28 @@ class MainActivity : AppCompatActivity(), ExitDialog.Exit {
             dueDate.add(Calendar.HOUR_OF_DAY, 24)  //24
         }
         val timeDiff = dueDate.timeInMillis - currentDate.timeInMillis
+        Timber.d("dueDif ${timeDiff}")
 //
         val dailyWorkRequest = OneTimeWorkRequestBuilder<DailyWorker>()
             .setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
+            .addTag(NOTIFY_WORK_ID)
             .build()
 
-        WorkManager.getInstance(applicationContext).enqueue(dailyWorkRequest)
-//    }
+//        WorkManager.getInstance(applicationContext)
+//            .enqueueUniqueWork(
+//                NOTIFY_WORK_ID,
+//                ExistingWorkPolicy.KEEP,
+//                dailyWorkRequest
+//            )
+        WorkManager.getInstance(applicationContext)
+            .enqueue(dailyWorkRequest)
     }
 
     override fun exit() {
         finish()
+    }
+
+    companion object {
+        const val NOTIFY_WORK_ID = "download work"
     }
 }

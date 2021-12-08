@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class RepositoryActivity @Inject constructor(
-    @ApplicationContext private val  context: Context,
+    @ApplicationContext private val context: Context,
     private val api: StravaApi,
     private val activityDao: ActivityDao,
     private val personDao: PersonDao
@@ -79,7 +79,6 @@ class RepositoryActivity @Inject constructor(
 
         WorkManager.getInstance(context)
             .enqueueUniqueWork(DOWNLOAD_WORK_ID, ExistingWorkPolicy.APPEND_OR_REPLACE, workRequest)
-
     }
 
     fun queryNewActivities(): List<PersonWithActivity> {
@@ -115,7 +114,7 @@ class RepositoryActivity @Inject constructor(
         return list
     }
 
-    private fun setMomentLastAddedActivity(){
+    private fun setMomentLastAddedActivity() {
         val momentAdd = Calendar.getInstance().timeInMillis
 
     }
