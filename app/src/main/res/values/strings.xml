@@ -58,4 +58,5 @@
     <string name="contact_list_is_empty">Contact list is empty</string>
     <string name="error_permission">Error: Ascent does not have access to your contacts</string>
     <string name="url_strava_profile">Я уже в Strava : https://www.strava.com/athletes/93933617</string>
+    <string name="retry_snackbar_text">Error: Ascent could not load feed. Retry.</string>
 </resources>

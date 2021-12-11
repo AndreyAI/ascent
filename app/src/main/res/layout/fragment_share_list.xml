@@ -23,7 +23,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/containerSnack"
+        android:id="@+id/containerProgress"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
@@ -38,8 +38,8 @@
         android:id="@+id/contactList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,21 +55,21 @@
         android:layout_marginStart="25dp"
         android:layout_marginBottom="25dp"
         android:orientation="horizontal"
-        android:weightSum="2"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
+        android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
 
-    <Button
-        android:id="@+id/buttonAllowPermission"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/allow"
-        android:textAllCaps="false"
-        android:textSize="12sp"/>
+        <Button
+            android:id="@+id/buttonAllowPermission"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/allow"
+            android:textAllCaps="false"
+            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -81,27 +81,27 @@
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="60dp"
         android:text="@string/allow_use"
-        android:textSize="35sp"
         android:textColor="?attr/colorPrimary"
+        android:textSize="35sp"
         android:textStyle="bold"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/containerButton"
         app:layout_constraintBottom_toTopOf="@+id/containerButton"
-        app:layout_constraintEnd_toEndOf="@+id/containerButton"/>
+        app:layout_constraintEnd_toEndOf="@+id/containerButton"
+        app:layout_constraintStart_toStartOf="@+id/containerButton" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textEmptyList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/contact_list_is_empty"
-        android:textSize="35sp"
         android:textColor="?attr/colorPrimary"
+        android:textSize="35sp"
         android:textStyle="bold"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbar" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -110,10 +110,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

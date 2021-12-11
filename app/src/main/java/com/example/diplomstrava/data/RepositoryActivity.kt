@@ -116,7 +116,6 @@ class RepositoryActivity @Inject constructor(
 
     private fun setMomentLastAddedActivity() {
         val momentAdd = Calendar.getInstance().timeInMillis
-
     }
 
     companion object {

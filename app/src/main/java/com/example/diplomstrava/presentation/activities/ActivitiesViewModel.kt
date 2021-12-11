@@ -31,6 +31,10 @@ class ActivitiesViewModel @Inject constructor(
     val stateSnack: LiveData<Unit>
         get() = stateSnackLiveData
 
+    private val retrySnackLiveData = SingleLiveEvent<Unit>()
+    val retrySnack: LiveData<Unit>
+        get() = retrySnackLiveData
+
     fun bindViewModel(isSwipe: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -44,16 +48,15 @@ class ActivitiesViewModel @Inject constructor(
                     stateLiveData.postValue(ScreenState.EmptyListState)
                 }
             } catch (t: Throwable) {
-                //stateLiveData.postValue(ScreenState.ErrorState)
                 val activities = repository.queryCachedActivities()
                 if (activities.isNotEmpty()) {
                     activitiesLiveData.postValue(activities)
                     stateLiveData.postValue(ScreenState.ErrorState)
                     stateSnackLiveData.postValue(Unit)
-                } else
-                    stateLiveData.postValue(ScreenState.EmptyListState)
-                //stateLiveData.postValue(ScreenState.DefaultState)
-                Timber.e(t)
+                } else {
+                    stateLiveData.postValue(ScreenState.RetryListState)
+                    retrySnackLiveData.postValue(Unit)
+                }
             }
         }
     }

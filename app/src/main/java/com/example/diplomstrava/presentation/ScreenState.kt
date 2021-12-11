@@ -7,6 +7,7 @@ sealed class ScreenState {
     object SuccessState : ScreenState()
     object ErrorState : ScreenState()
     object EmptyListState : ScreenState()
+    object RetryListState : ScreenState()
     object CancelState : ScreenState()
     object LogoutState : ScreenState()
 }

@@ -17,6 +17,8 @@
         <item name="android:letterSpacing">0.01</item>
     </style>
 
+
+
     <style name="smallText" parent="TextAppearance.MaterialComponents.Caption">
         <item name="android:textSize">10sp</item>
         <item name="fontFamily">roboto</item>

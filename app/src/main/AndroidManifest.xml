@@ -23,6 +23,23 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".presentation.WebActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="strava.com"
+                    android:pathPrefix="/athletes/"
+                    android:scheme="https" />
+            </intent-filter>
         </activity>
 
         <!-- If you want to disable androidx.startup completely. -->
@@ -30,7 +47,9 @@
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
             tools:node="remove">
+
         </provider>
+
 
     </application>
 

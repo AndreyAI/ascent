@@ -8,6 +8,8 @@ import android.os.Handler
 import android.os.Looper
 import android.view.Gravity
 import android.view.View
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import android.widget.TextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.isVisible
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.diplomstrava.R
 import com.example.diplomstrava.data.Contact
+import com.example.diplomstrava.data.PersonWithActivity
 import com.example.diplomstrava.databinding.FragmentShareListBinding
 import com.example.diplomstrava.presentation.ScreenState
 import com.example.diplomstrava.presentation.share.adapter.ShareListAdapter
@@ -41,7 +44,7 @@ class ShareListFragment : Fragment(R.layout.fragment_share_list) {
         viewModel.getContact()
 
         viewModel.contacts.observe(viewLifecycleOwner) {
-            contactAdapter.items = it
+            refreshList(it)
         }
 
         viewModel.state.observe(viewLifecycleOwner) {
@@ -61,6 +64,17 @@ class ShareListFragment : Fragment(R.layout.fragment_share_list) {
         initList()
         initErrorSnack()
 
+    }
+
+    private fun refreshList(contacts: List<Contact>) {
+        val animationController: LayoutAnimationController =
+            AnimationUtils.loadLayoutAnimation(
+                requireContext(),
+                R.anim.layout_animation_recycler
+            )
+        binding.contactList.layoutAnimation = animationController
+        binding.contactList.layoutAnimation.start()
+        contactAdapter.items = contacts
     }
 
     private fun permissionRequest() {
@@ -110,7 +124,7 @@ class ShareListFragment : Fragment(R.layout.fragment_share_list) {
     private fun initErrorSnack() {
 
         errorSnackbar = Snackbar.make(
-            binding.containerSnack,
+            binding.containerProgress,
             R.string.error_permission,
             Snackbar.LENGTH_SHORT
         )
@@ -134,6 +148,7 @@ class ShareListFragment : Fragment(R.layout.fragment_share_list) {
             0
         )
         textView.compoundDrawablePadding = 30
+        textView.textSize = View.resolveSize(20, View.MEASURED_SIZE_MASK).toFloat()
 
         val params = errorSnackbar!!.view.layoutParams as CoordinatorLayout.LayoutParams
         params.gravity = Gravity.TOP

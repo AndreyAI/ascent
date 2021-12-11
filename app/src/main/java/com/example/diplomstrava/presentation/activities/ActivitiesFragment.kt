@@ -1,5 +1,6 @@
 package com.example.diplomstrava.presentation.activities
 
+
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -7,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.diplomstrava.data.Activity
 import com.example.diplomstrava.presentation.activities.adapter.ActivityListAdapter
 import com.example.diplomstrava.presentation.containerfragment.ContainerFragmentDirections
 import com.example.diplomstrava.utils.autoCleared
@@ -15,7 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import android.view.animation.LayoutAnimationController
 import com.example.diplomstrava.data.PersonWithActivity
-
 import com.example.diplomstrava.presentation.ScreenState
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -25,6 +24,10 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diplomstrava.R
+import android.text.method.LinkMovementMethod
+import android.text.Spanned
+import android.text.style.ClickableSpan
+import android.text.SpannableString
 import com.example.diplomstrava.databinding.FragmentActivitiesBinding
 
 
@@ -36,6 +39,7 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
     private val viewModel: ActivitiesViewModel by viewModels()
 
     private var errorSnackbar: Snackbar? = null
+    private var retrySnackbar: Snackbar? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,14 +55,23 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
         }
 
         viewModel.state.observe(viewLifecycleOwner) {
+            Timber.d(it.toString())
             updateView(it)
         }
 
         viewModel.stateSnack.observe(viewLifecycleOwner) {
             if (errorSnackbar?.isShown == false)
                 errorSnackbar?.show()
+
         }
 
+        viewModel.retrySnack.observe(viewLifecycleOwner) {
+            if (retrySnackbar?.isShown == false)
+                retrySnackbar?.show()
+        }
+
+
+        initRetrySnack()
         initErrorSnack()
         initList()
         listenersInit()
@@ -73,8 +86,6 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
         binding.listActivities.layoutAnimation = animationController
         binding.listActivities.layoutAnimation.start()
         activityAdapter.items = personWithActivities
-        activityAdapter.notifyDataSetChanged()
-        Timber.d(personWithActivities.toString())
     }
 
 
@@ -84,7 +95,6 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
         }
 
         binding.swipeRefresh.setOnRefreshListener {
-            Timber.d("swipe refresh")
             viewModel.bindViewModel(true)
             binding.swipeRefresh.isRefreshing = false
         }
@@ -92,8 +102,6 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.refresh -> {
-                    //viewModel.bindViewModel()
-
                     true
                 }
                 else -> false
@@ -106,7 +114,6 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
             Timber.d("CLICK")
         }
         with(binding.listActivities) {
-            //adapter = activityAdapter
             setHasFixedSize(true)
             activityAdapter.registerAdapterDataObserver(object :
                 RecyclerView.AdapterDataObserver() {
@@ -123,24 +130,25 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
 
         when (state) {
             is ScreenState.DefaultState -> {
-                refreshView(false, true, false, false)
+                refreshView(false, true, false, false, false, false)
             }
             is ScreenState.LoadingState -> {
-                refreshView(true, false, false, false)
+                refreshView(true, false, false, false, false, false)
             }
             is ScreenState.SuccessState -> {
 
             }
             is ScreenState.SwipeRefresh -> {
-                refreshView(false, true, true, false)
-                Timber.d("Swipe")
+                refreshView(false, true, true, false, false, false)
             }
             is ScreenState.ErrorState -> {
-                refreshView(false, true, true, false)
-                Timber.d("error state")
+                refreshView(false, true, false, false, false, true)
             }
             is ScreenState.EmptyListState -> {
-                refreshView(false, true, false, true)
+                refreshView(false, true, false, true, false, false)
+            }
+            is ScreenState.RetryListState -> {
+                refreshView(false, true, false, false, true, false)
             }
             else -> {}
         }
@@ -149,39 +157,41 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
     private fun refreshView(
         progressLoading: Boolean,
         swipeContainer: Boolean,
-        progressSwipe: Boolean,
-        emptyList: Boolean
+        progressContainer: Boolean,
+        emptyList: Boolean,
+        retry: Boolean,
+        error: Boolean
     ) {
         binding.progressBar.isVisible = progressLoading
-        binding.swipeRefresh.isVisible = swipeContainer
-        binding.containerSnack.isVisible = progressSwipe
+        binding.containerProgress.isVisible = progressContainer
         binding.textEmptyList.isVisible = emptyList
+        binding.containerSnackRetry.isVisible = retry
+        binding.containerSnackError.isVisible = error
+        binding.swipeRefresh.isVisible = swipeContainer
     }
 
     private fun initErrorSnack() {
 
         errorSnackbar = Snackbar.make(
-            binding.containerSnack,
+            binding.containerSnackError,
             R.string.loaded_from_cash,
-            Snackbar.LENGTH_SHORT
+            Snackbar.LENGTH_LONG
         )
             .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
                 override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                     super.onDismissed(transientBottomBar, event)
-                    //refreshView(false, true, false)
-                    binding.progressBarSwipe.isVisible = true
                     viewModel.bindDefaultModel()
                 }
 
                 override fun onShown(transientBottomBar: Snackbar?) {
                     super.onShown(transientBottomBar)
-                    binding.progressBarSwipe.isVisible = false
+
                 }
             })
 
         val textViewButton =
             errorSnackbar!!.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_action)
-        textViewButton.text = " " // clear the text to keep only the icon
+        textViewButton.text = " "
         textViewButton.setCompoundDrawablesWithIntrinsicBounds(
             0,
             0,
@@ -197,13 +207,7 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
             0,
             0
         )
-
-
-        val params = errorSnackbar!!.view.layoutParams as CoordinatorLayout.LayoutParams
-        params.gravity = Gravity.TOP
-        params.topMargin = errorSnackbar!!.view.height
-
-        errorSnackbar!!.view.layoutParams = params
+        textView.textSize = View.resolveSize(20, View.MEASURED_SIZE_MASK).toFloat()
 
         errorSnackbar!!
             .setAction(" ") {
@@ -213,8 +217,54 @@ class ActivitiesFragment : Fragment(R.layout.fragment_activities) {
     }
 
 
-    private fun shareActivity(activity: Activity) {
-        Timber.d(activity.description)
+    private fun initRetrySnack() {
+
+        retrySnackbar = Snackbar.make(
+            binding.containerSnackRetry,
+            R.string.retry_snackbar_text,
+            Snackbar.LENGTH_SHORT
+        )
+
+        val textViewButton =
+            retrySnackbar!!.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_action)
+        textViewButton.text = " " // clear the text to keep only the icon
+        textViewButton.setCompoundDrawablesWithIntrinsicBounds(
+            0,
+            0,
+            R.drawable.ic_close,
+            0
+        )
+
+        val textView =
+            retrySnackbar!!.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+        textView.setCompoundDrawablesWithIntrinsicBounds(
+            R.drawable.ic_alarm,
+            0,
+            0,
+            0
+        )
+        textView.compoundDrawablePadding = 50
+
+        val ss = SpannableString(textView.text)
+
+        val clickableSpan: ClickableSpan = object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                viewModel.bindViewModel(false)
+            }
+        }
+
+        val startIndex = textView.text.indexOf("Retry.")
+        val endIndex = startIndex + "Retry.".length
+        ss.setSpan(clickableSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        textView.text = ss
+        textView.textSize = View.resolveSize(20, View.MEASURED_SIZE_MASK).toFloat()
+        textView.movementMethod = LinkMovementMethod.getInstance()
+
+        retrySnackbar!!
+            .setAction(" ") {
+                retrySnackbar!!.dismiss()
+            }
     }
 
     private fun addActivityNav() {

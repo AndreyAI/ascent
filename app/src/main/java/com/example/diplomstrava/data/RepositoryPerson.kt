@@ -122,9 +122,9 @@ class RepositoryPerson @Inject constructor(
             val numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
             val number = cursor.getString(numberIndex)
             list.add(number)
-            phones += number + "\n"
+            //phones += number + "\n"
         } while (cursor.moveToNext())
-        return phones
+        return list.last()//phones
     }
 
     private fun getAvatarForContact(contactId: Long): String {
