@@ -16,8 +16,6 @@ class PersonViewModel @Inject constructor(
     private val repository: RepositoryPerson
 ) : ViewModel() {
 
-    //val person = repository.getPersonFlow().asLiveData()
-
     private val personLiveData = MutableLiveData<Person?>()
     val person: LiveData<Person?>
         get() = personLiveData

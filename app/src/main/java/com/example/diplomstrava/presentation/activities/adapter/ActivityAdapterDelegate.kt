@@ -1,5 +1,6 @@
 package com.example.diplomstrava.presentation.activities.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -58,6 +59,7 @@ class ActivityAdapterDelegate(
             }
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(activity: PersonWithActivity) {
             currentActivity = activity
 
@@ -80,7 +82,55 @@ class ActivityAdapterDelegate(
                 binding.textDescription.isVisible = true
                 binding.textDescription.text = activity.activity.description
             }
+            setImageActivity(activity.activity.type)
+        }
 
+        private fun setImageActivity(type: String){
+            when (type) {
+
+                "AlpineSki" -> uploadImage(R.drawable.alpineski)
+                "BackcountrySki" -> uploadImage(R.drawable.backcountry)
+                "Canoeing" -> uploadImage(R.drawable.canoeing)
+                "Crossfit" -> uploadImage(R.drawable.crossfit)
+                "EBikeRide" -> uploadImage(R.drawable.ebikeride)
+                "Elliptical" -> uploadImage(R.drawable.elliptical)
+                "Golf" -> uploadImage(R.drawable.golf)
+                "Handcycle" -> uploadImage(R.drawable.handcycle)
+                "Hike" -> uploadImage(R.drawable.hike)
+                "IceSkate" -> uploadImage(R.drawable.iceskate)
+                "InlineSkate" -> uploadImage(R.drawable.inlineskate)
+                "Kayaking" -> uploadImage(R.drawable.kayaking)
+                "Kitesurf" -> uploadImage(R.drawable.kitesurf)
+                "NordicSki" -> uploadImage(R.drawable.nordicski)
+                "Ride" -> uploadImage(R.drawable.ride)
+                "RockClimbing" -> uploadImage(R.drawable.rockclimbing)
+                "RollerSki" -> uploadImage(R.drawable.rollerski)
+                "Rowing" -> uploadImage(R.drawable.rowing)
+                "Run" -> uploadImage(R.drawable.activity_run)
+                "Sail" -> uploadImage(R.drawable.sail)
+                "Skateboard" -> uploadImage(R.drawable.skateboard)
+                "Snowboard" -> uploadImage(R.drawable.snowboard)
+                "Snowshoe" -> uploadImage(R.drawable.snowshoe)
+                "Soccer" -> uploadImage(R.drawable.soccer)
+                "StairStepper" -> uploadImage(R.drawable.stairstepper)
+                "StandUpPaddling" -> uploadImage(R.drawable.stand_up_paddlong)
+                "Surfing" -> uploadImage(R.drawable.surfing)
+                "Swim" -> uploadImage(R.drawable.swim)
+                "Velomobile" -> uploadImage(R.drawable.velomobile)
+                "VirtualRide" -> uploadImage(R.drawable.virtualride)
+                "VirtualRun" -> uploadImage(R.drawable.virtualrun)
+                "Walk" -> uploadImage(R.drawable.walk)
+                "WeightTraining" -> uploadImage(R.drawable.weight_training)
+                //"Wheelchair" -> uploadImage(R.drawable.)
+                "Workout" -> uploadImage(R.drawable.workout)
+                "Yoga" -> uploadImage(R.drawable.yoga)
+            }
+        }
+
+        private fun uploadImage(res: Int){
+            Glide.with(itemView)
+                .load(res)
+                .into(binding.imageActivity)
         }
 
     }

@@ -5,12 +5,9 @@ import com.example.diplomstrava.data.PersonWithActivity
 import com.example.diplomstrava.data.RepositoryActivity
 import com.example.diplomstrava.presentation.ScreenState
 import com.example.diplomstrava.utils.SingleLiveEvent
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -67,8 +64,3 @@ class ActivitiesViewModel @Inject constructor(
         }
     }
 }
-
-/*
-class MovieListViewModel : ViewModel() {
-
- */

@@ -9,11 +9,11 @@
         android:id="@+id/imageLogo"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_logo_foreground" />
+        app:srcCompat="@drawable/logo" />
 
     <RelativeLayout
         android:id="@+id/textDivContainer"

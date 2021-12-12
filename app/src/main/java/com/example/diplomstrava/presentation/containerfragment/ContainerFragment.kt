@@ -50,29 +50,17 @@ class ContainerFragment : Fragment(R.layout.fragment_container) {
 
     private fun fragmentInit(state: String) {
         when (state) {
-            HOME -> //if (childFragmentManager.findFragmentByTag(HOME) !is PersonFragment) {
-            {
-//                if (childFragmentManager.findFragmentByTag(HOME) != null) {
-//                    childFragmentManager.popBackStack(HOME, 0)
-//                    Timber.d(" pop home")
-//                } else
+            HOME -> {
                 displayFragment(
                     PersonFragment(), HOME, LIST
                 )
                 Timber.d("replace home")
-                // }
             }
-            LIST -> //if (childFragmentManager.findFragmentByTag(LIST) !is ActivitiesFragment) {
-            {
-//                if (childFragmentManager.findFragmentByTag(LIST) != null) {
-//                    childFragmentManager.popBackStack(LIST, 0)
-//                    Timber.d(" pop list")
-//                } else
+            LIST -> {
                 displayFragment(
                     ActivitiesFragment(), LIST, HOME
                 )
                 Timber.d("replace list")
-                // }
             }
         }
     }

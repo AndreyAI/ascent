@@ -29,7 +29,7 @@ class AuthFragment : Fragment(R.layout.fragment_login) {
             when {
                 tokenExchangeRequest != null && exception == null ->
                     viewModel.onAuthCodeReceived(tokenExchangeRequest)
-                exception != null -> viewModel.onAuthCodeFailed(exception)
+                exception != null -> viewModel.onAuthCodeFailed()
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
@@ -78,6 +78,7 @@ class AuthFragment : Fragment(R.layout.fragment_login) {
                 toast("Cancel")
                 defaultView(true)
             }
+            else -> {}
         }
     }
 

@@ -13,7 +13,6 @@ class ActivityCustomAdapter {
     fun fromJson(customActivity: CustomActivity): Activity {
         return Activity(
             id = customActivity.id,
-            //personId = customActivity.personId.id,
             name = customActivity.name,
             distance = customActivity.distance,
             time = customActivity.time,

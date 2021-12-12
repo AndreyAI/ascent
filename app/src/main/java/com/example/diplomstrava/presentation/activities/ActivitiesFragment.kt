@@ -18,9 +18,7 @@ import com.example.diplomstrava.data.PersonWithActivity
 import com.example.diplomstrava.presentation.ScreenState
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
-import android.view.Gravity
 import android.widget.TextView
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diplomstrava.R

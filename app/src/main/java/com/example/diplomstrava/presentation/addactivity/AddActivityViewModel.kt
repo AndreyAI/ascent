@@ -1,6 +1,5 @@
 package com.example.diplomstrava.presentation.addactivity
 
-import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.diplomstrava.data.RepositoryActivity
@@ -11,11 +10,9 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class AddActivityViewModel@Inject constructor(
+class AddActivityViewModel @Inject constructor(
     private val repository: RepositoryActivity
 ) : ViewModel() {
-
-    //private val repository = RepositoryActivity()
 
     fun saveActivity(
         name: String,
@@ -37,7 +34,6 @@ class AddActivityViewModel@Inject constructor(
                 )
             } catch (t: Throwable) {
                 Timber.e(t, "user save error")
-                //repository.addWorkerTask()
             }
         }
     }

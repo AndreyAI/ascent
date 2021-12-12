@@ -20,10 +20,6 @@ class RepositoryActivity @Inject constructor(
     private val personDao: PersonDao
 ) {
 
-    fun getActivities(): List<Activity> {
-        return activityDao.getActivities()
-    }
-
     fun saveActivity(
         name: String,
         type: String,
@@ -112,10 +108,6 @@ class RepositoryActivity @Inject constructor(
             list.add(personWithActivity)
         }
         return list
-    }
-
-    private fun setMomentLastAddedActivity() {
-        val momentAdd = Calendar.getInstance().timeInMillis
     }
 
     companion object {

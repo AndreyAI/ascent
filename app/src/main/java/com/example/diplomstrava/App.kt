@@ -1,7 +1,6 @@
 package com.example.diplomstrava
 
 import android.app.Application
-import android.app.NotificationChannel
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import com.example.diplomstrava.presentation.NotificationChanel

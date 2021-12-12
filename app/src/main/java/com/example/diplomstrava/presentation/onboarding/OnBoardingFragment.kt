@@ -9,7 +9,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.diplomstrava.R
 import com.example.diplomstrava.data.OnBoardingData
 import com.example.diplomstrava.databinding.FragmentOnboardingBinding
-import timber.log.Timber
 import kotlin.math.abs
 
 class OnBoardingFragment : Fragment(R.layout.fragment_onboarding) {

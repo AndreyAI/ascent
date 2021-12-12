@@ -11,7 +11,6 @@ import com.example.diplomstrava.data.db.PersonDao
 import com.example.diplomstrava.networking.StravaApi
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.lang.Long.parseLong
@@ -23,9 +22,6 @@ class RepositoryPerson @Inject constructor(
     private val personDao: PersonDao,
     private val activityDao: ActivityDao
 ) {
-    fun getPersonFlow(): Flow<Person?> {
-        return personDao.getPersonFlow()
-    }
 
     fun queryPersonData(): Person? {
 
@@ -117,12 +113,10 @@ class RepositoryPerson @Inject constructor(
     private fun getPhonesFromCursor(cursor: Cursor): String {
         if (cursor.moveToFirst().not()) return ""
         val list = mutableListOf<String>()
-        var phones = ""
         do {
             val numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
             val number = cursor.getString(numberIndex)
             list.add(number)
-            //phones += number + "\n"
         } while (cursor.moveToNext())
         return list.last()//phones
     }

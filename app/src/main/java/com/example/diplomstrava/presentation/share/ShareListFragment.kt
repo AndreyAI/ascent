@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.diplomstrava.R
 import com.example.diplomstrava.data.Contact
-import com.example.diplomstrava.data.PersonWithActivity
 import com.example.diplomstrava.databinding.FragmentShareListBinding
 import com.example.diplomstrava.presentation.ScreenState
 import com.example.diplomstrava.presentation.share.adapter.ShareListAdapter

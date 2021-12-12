@@ -27,10 +27,10 @@ object FormatData {
         if (hours != 0) time += "$hours h"
         var remainder = seconds.toInt() - hours * 3600
         val minutes = remainder / 60
-        if (minutes != 0) time += "$minutes m"
+        if (minutes != 0) time += " $minutes m"
         remainder -= minutes * 60
         val secs = remainder
-        if (secs != 0) time += "$secs s"
+        if (secs != 0) time += " $secs s"
 
         if (time == "") time = "0 s"
 

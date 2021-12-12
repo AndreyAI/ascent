@@ -50,6 +50,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textSize="34sp"
         android:textStyle="bold"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/imageWelcome"
         app:layout_constraintStart_toStartOf="@+id/imageWelcome"
         app:layout_constraintTop_toBottomOf="@+id/imageWelcome"

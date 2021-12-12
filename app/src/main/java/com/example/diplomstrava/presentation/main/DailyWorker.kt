@@ -1,4 +1,4 @@
-package com.example.diplomstrava.presentation
+package com.example.diplomstrava.presentation.main
 
 import android.content.Context
 import android.media.RingtoneManager
@@ -8,7 +8,7 @@ import androidx.hilt.work.HiltWorker
 import androidx.work.*
 import com.example.diplomstrava.R
 import com.example.diplomstrava.data.db.ActivityDao
-import com.example.diplomstrava.presentation.main.MainActivity
+import com.example.diplomstrava.presentation.NotificationChanel
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import timber.log.Timber
@@ -32,9 +32,7 @@ class DailyWorker @AssistedInject constructor(
         dueDate.set(Calendar.MINUTE, 0)
         dueDate.set(Calendar.SECOND, 0)
 
-        var timeDiff = dueDate.timeInMillis - lastActivity //  between setpoint and last activity
-        //val dayToMillis = 1000 * 60 * 60 * 24
-        Timber.d(timeDiff.toString())
+        var timeDiff = dueDate.timeInMillis - lastActivity
         if (timeDiff > MILLIS_IN_DAY) {
             showNotification()
             Timber.d("HAHAHAHAHAHA")

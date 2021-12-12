@@ -9,11 +9,6 @@ import com.example.diplomstrava.data.ActivityContract
 import com.example.diplomstrava.networking.StravaApi
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import org.threeten.bp.Instant
 import timber.log.Timber
 
 
@@ -43,11 +38,6 @@ class PostActivityWorker @AssistedInject constructor(
 
         return Result.success()
 
-//        return when (1) {
-//            "1" -> Result.retry()
-//            "2" -> Result.failure()
-//            else -> Result.success()
-//        }
     }
 
 }

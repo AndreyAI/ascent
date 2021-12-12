@@ -6,9 +6,6 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.example.diplomstrava.databinding.DialogExitBinding
-import com.example.diplomstrava.databinding.DialogLogoutBinding
-import kotlinx.coroutines.NonDisposableHandle.parent
-import timber.log.Timber
 
 class ExitDialog : DialogFragment() {
 
@@ -30,13 +27,6 @@ class ExitDialog : DialogFragment() {
 
         return AlertDialog.Builder(requireContext())
             .setView(binding.root)
-//            .setPositiveButton("Ok") { _, _ ->
-//                val hour = binding.editHoursInput.text.toString()
-//                val minutes = binding.editMinutesInput.text.toString()
-//                val text = "$hour h $minutes m"
-//                Timber.d(text)
-//                (parentFragment as DurationDialog.SetText).setText(text)
-//            }
             .create()
     }
 

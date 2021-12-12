@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DiplomStrava</string>
+    <string name="app_name">Ascent</string>
     <string name="skip">Skip</string>
     <string name="okay">Okay</string>
     <string name="welcome_to_ascent">Welcome to Ascent</string>
@@ -59,4 +59,9 @@
     <string name="error_permission">Error: Ascent does not have access to your contacts</string>
     <string name="url_strava_profile">Я уже в Strava : https://www.strava.com/athletes/93933617</string>
     <string name="retry_snackbar_text">Error: Ascent could not load feed. Retry.</string>
+    <string name="profile">Profile</string>
+    <string name="enter_name">You need enter a name.</string>
+    <string name="choice_date">You need choice a date.</string>
+    <string name="enter_time">You need enter a time.</string>
+    <string name="enter_distance">You need enter a distance.</string>
 </resources>

@@ -51,10 +51,6 @@ class AddActivityFragment : Fragment(R.layout.fragment_add_activity),
         binding.editDateInput.setOnClickListener {
             setDateTime()
         }
-//        binding.editTimeInput.setOnClickListener {
-//            DurationDialog()
-//                .show(childFragmentManager, "Duration")
-//        }
 
     }
 
@@ -123,22 +119,20 @@ class AddActivityFragment : Fragment(R.layout.fragment_add_activity),
     @SuppressLint("ResourceAsColor")
     private fun validateForm(): Boolean {
         val isNameEmpty = binding.editNameInput.text.toString().isEmpty()
-        //val isTypeEmpty = binding.spinnerType.selectedItem.toString().isEmpty()
         val isDateEmpty = binding.editDateInput.text.toString().isEmpty()
         val isTimeEmpty = binding.editTimeInput.text.toString().isEmpty()
         val isDistanceEmpty = binding.editDistanceInput.text.toString().isEmpty()
-        //val isDescriptionEmpty = binding.editDescriptionInput.text.toString().isEmpty()
 
-        if (isNameEmpty) binding.editName.error = "You need enter a name"
+        if (isNameEmpty) binding.editName.error = getString(R.string.enter_name)
         else binding.editName.error = null
 
-        if (isDateEmpty) binding.editDate.error = "You need choice a date"
+        if (isDateEmpty) binding.editDate.error = getString(R.string.choice_date)
         else binding.editDate.error = null
 
-        if (isTimeEmpty) binding.editTime.error = "You need enter a time"
+        if (isTimeEmpty) binding.editTime.error = getString(R.string.enter_time)
         else binding.editTime.error = null
 
-        if (isDistanceEmpty) binding.editDistance.error = "You need enter a distance"
+        if (isDistanceEmpty) binding.editDistance.error = getString(R.string.enter_distance)
         else binding.editDistance.error = null
 
         return !isNameEmpty && !isDateEmpty && !isTimeEmpty && !isDistanceEmpty

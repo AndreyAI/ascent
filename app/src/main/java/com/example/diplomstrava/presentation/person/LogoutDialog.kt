@@ -29,17 +29,10 @@ class LogoutDialog : DialogFragment() {
 
         return AlertDialog.Builder(requireContext())
             .setView(binding.root)
-//            .setPositiveButton("Ok") { _, _ ->
-//                val hour = binding.editHoursInput.text.toString()
-//                val minutes = binding.editMinutesInput.text.toString()
-//                val text = "$hour h $minutes m"
-//                Timber.d(text)
-//                (parentFragment as DurationDialog.SetText).setText(text)
-//            }
             .create()
     }
 
-    interface Logout{
+    interface Logout {
         fun logout()
     }
 }

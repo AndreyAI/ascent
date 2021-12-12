@@ -58,8 +58,8 @@ class ShareListAdapterDelegate(
             Glide.with(itemView)
                 .load(Uri.parse(contact.avatarUri))
                 .transform(CircleCrop())
-                .placeholder(R.drawable.ic_contact_placeholder)
-                .error(R.drawable.ic_contact_error)
+                .placeholder(R.drawable.ic_contact_error)
+                .error(R.drawable.ic_contact_placeholder)
                 .into(binding.imageAvatar)
 
 

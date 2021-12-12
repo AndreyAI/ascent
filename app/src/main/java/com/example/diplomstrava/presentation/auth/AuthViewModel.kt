@@ -11,7 +11,6 @@ import com.example.diplomstrava.R
 import com.example.diplomstrava.data.auth.AuthRepository
 import com.example.diplomstrava.presentation.ScreenState
 import com.example.diplomstrava.utils.SingleLiveEvent
-import net.openid.appauth.AuthorizationException
 import net.openid.appauth.AuthorizationService
 import net.openid.appauth.TokenRequest
 
@@ -29,7 +28,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         get() = openAuthPageLiveEvent
 
 
-    fun onAuthCodeFailed(exception: AuthorizationException) {
+    fun onAuthCodeFailed() {
         stateLiveData.postValue(ScreenState.CancelState)
     }
 

@@ -11,14 +11,3 @@ fun <T : Fragment> T.withArguments(action: Bundle.() -> Unit): T {
         arguments = args
     }
 }
-
-fun <T : Activity> T.toast(message: String) {
-    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-}
-
-
-
-
-//fun meterToKm(merers: Double): String{
-//    return "${merers/1000.0} km"
-//}

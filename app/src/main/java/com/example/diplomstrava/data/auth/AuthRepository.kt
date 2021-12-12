@@ -31,7 +31,7 @@ class AuthRepository {
         onComplete: () -> Unit,
         onError: () -> Unit
     ) {
-        authService.performTokenRequest(tokenRequest, getClientAuthentication()) { response, ex ->
+        authService.performTokenRequest(tokenRequest, getClientAuthentication()) { response, _ ->
             when {
                 response != null -> {
                     NetworkingModule.accessToken = response.accessToken.orEmpty()

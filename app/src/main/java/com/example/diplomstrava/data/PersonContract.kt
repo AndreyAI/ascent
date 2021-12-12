@@ -18,26 +18,3 @@ object PersonContract {
 
     }
 }
-/*
-data class Person(
-    @Json(name = ")
-    val lastUpdate: String,
-    @Json(name = "updated_at")
-    val lastUpdate: String,
-    @Json(name = "firstname")
-    val firstName: String,
-    @Json(name = "lastname")
-    val lastName: String,
-    @Json(name = "country")
-    val country: String,
-    @Json(name = "sex")
-    val sex: String,
-    @Json(name = "profile")
-    val avatarUrl: String,
-    @Json(name = "friend_count")
-    val followingCount: Long,
-    @Json(name = "follower_count")
-    val followersCount: Long,
-    @Json(name = "weight")
-    val weight: Double
-)*/

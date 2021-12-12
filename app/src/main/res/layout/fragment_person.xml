@@ -11,7 +11,6 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:menu="@menu/menu_top_app_bar"
-            app:title="Profile" />
+            app:title="@string/profile" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -108,7 +107,7 @@
                         <TextView
                             android:id="@+id/textFollowers"
                             style="@style/smallText"
-                            android:layout_width="70dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="14dp"
                             android:layout_marginTop="30dp"
@@ -228,7 +227,6 @@
                             android:layout_marginEnd="60dp"
                             android:layout_marginBottom="20dp"
                             app:endIconDrawable="@drawable/ic_arrow_dropdown"
-                            app:endIconTint="@color/dark_gray"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@id/textTitleWeight"
                             app:layout_constraintTop_toBottomOf="@id/textTitleWeight" />
