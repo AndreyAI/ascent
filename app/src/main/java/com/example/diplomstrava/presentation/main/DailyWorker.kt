@@ -7,6 +7,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.hilt.work.HiltWorker
 import androidx.work.*
 import com.example.diplomstrava.R
+import com.example.diplomstrava.data.LastActivityFromApp
 import com.example.diplomstrava.data.db.ActivityDao
 import com.example.diplomstrava.presentation.NotificationChanel
 import dagger.assisted.Assisted
@@ -24,7 +25,14 @@ class DailyWorker @AssistedInject constructor(
 
     override suspend fun doWork(): Result {
 
-        val lastActivity = activityDao.getLastActivityFromApp().first().timeStamp
+        val lastActivity = activityDao.getLastActivityFromApp()
+        if(lastActivity.isNullOrEmpty()){
+            activityDao.insertLastActivityFromApp(
+                LastActivityFromApp(id = 1L, Calendar.getInstance().timeInMillis)
+            )
+            return Result.success()
+        }
+
         val currentDate = Calendar.getInstance()
 
         val dueDate = Calendar.getInstance()
@@ -32,7 +40,7 @@ class DailyWorker @AssistedInject constructor(
         dueDate.set(Calendar.MINUTE, 0)
         dueDate.set(Calendar.SECOND, 0)
 
-        var timeDiff = dueDate.timeInMillis - lastActivity
+        var timeDiff = dueDate.timeInMillis - lastActivity.first().timeStamp
         if (timeDiff > MILLIS_IN_DAY) {
             showNotification()
             Timber.d("HAHAHAHAHAHA")

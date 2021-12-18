@@ -7,6 +7,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\User\\Desktop\\SkillBox\\diplomKeyStore.jks')
+            storePassword 'fghjkl'
+            keyAlias 'diplomStrava'
+            keyPassword 'fghjkl'
+        }
+    }
     compileSdk 31
 
     defaultConfig {
@@ -28,6 +36,7 @@ android {
                                       "$projectDir/schemas".toString()]
             }
         }
+        signingConfig signingConfigs.release
     }
 
 //    kapt {
@@ -36,7 +45,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
