@@ -2,7 +2,7 @@ package com.example.diplomstrava.presentation.addactivity
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.diplomstrava.data.RepositoryActivity
+import com.example.diplomstrava.data.RepositoryActivities
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddActivityViewModel @Inject constructor(
-    private val repository: RepositoryActivity
+    private val repository: RepositoryActivities
 ) : ViewModel() {
 
     fun saveActivity(

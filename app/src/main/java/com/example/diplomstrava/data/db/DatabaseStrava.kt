@@ -23,30 +23,3 @@ abstract class DatabaseStrava : RoomDatabase() {
         const val DB_NAME = "strava-database"
     }
 }
-
-/*
-@Database(
-    entities = [
-        User::class,
-        Currency::class,
-        Order::class,
-        Price::class,
-        Wallet::class,
-        WalletCurrencies::class
-    ], version = DatabaseExchange.DB_VERSION
-)
-abstract class DatabaseExchange : RoomDatabase() {
-
-    abstract fun userDao(): UserDao
-    abstract fun currencyDao(): CurrencyDao
-    abstract fun orderDao(): OrderDao
-    abstract fun priceDao(): PriceDao
-    abstract fun walletDao(): WalletDao
-
-
-    companion object {
-        const val DB_VERSION = 2
-        const val DB_NAME = "exchange-database"
-    }
-}
- */

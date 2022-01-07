@@ -2,7 +2,7 @@ package com.example.diplomstrava.presentation.activities
 
 import androidx.lifecycle.*
 import com.example.diplomstrava.data.PersonWithActivity
-import com.example.diplomstrava.data.RepositoryActivity
+import com.example.diplomstrava.data.RepositoryActivities
 import com.example.diplomstrava.presentation.ScreenState
 import com.example.diplomstrava.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ActivitiesViewModel @Inject constructor(
-    private val repository: RepositoryActivity
+    private val repository: RepositoryActivities
 ) : ViewModel() {
 
     //val activities = repository.getActivities().asLiveData()

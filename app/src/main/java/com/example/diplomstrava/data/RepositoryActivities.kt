@@ -13,7 +13,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class RepositoryActivity @Inject constructor(
+class RepositoryActivities @Inject constructor(
     @ApplicationContext private val context: Context,
     private val api: StravaApi,
     private val activityDao: ActivityDao,

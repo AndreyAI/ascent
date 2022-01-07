@@ -59,7 +59,7 @@ class RepositoryPerson @Inject constructor(
     fun logout() {
         personDao.deletePerson()
         activityDao.deleteActivities()
-        WorkManager.getInstance(context).cancelUniqueWork(RepositoryActivity.DOWNLOAD_WORK_ID)
+        WorkManager.getInstance(context).cancelUniqueWork(RepositoryActivities.DOWNLOAD_WORK_ID)
         api.logout("https://www.strava.com/oauth/deauthorize").execute()
     }
 
