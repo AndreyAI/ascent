@@ -109,9 +109,7 @@ class RepositoryActivity @Inject constructor(
         }
         return list
     }
-
     companion object {
         const val DOWNLOAD_WORK_ID = "download work"
     }
-
 }

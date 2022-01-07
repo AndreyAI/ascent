@@ -21,16 +21,12 @@ object FormatData {
         return "$meters m"
     }
 
-    fun formatTime(seconds: Long): String {
+    fun formatTime(minutes: Long): String {
         var time = ""
-        val hours = seconds.toInt() / 3600
+        val hours = minutes.toInt() / 60
         if (hours != 0) time += "$hours h"
-        var remainder = seconds.toInt() - hours * 3600
-        val minutes = remainder / 60
-        if (minutes != 0) time += " $minutes m"
-        remainder -= minutes * 60
-        val secs = remainder
-        if (secs != 0) time += " $secs s"
+        val min = minutes.toInt() - hours * 60
+        if (min != 0) time += " $min m"
 
         if (time == "") time = "0 s"
 
