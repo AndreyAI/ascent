@@ -25,4 +25,4 @@ Ascent - это Android - клиент сервиса для бегунов и �
 - Room
 - Dagger Hilt
 
-<img src="readme_files/onboarding.jpg" data-canonical-src="readme_files/onboarding.jpg" width="200" height="400" /> <img src="readme_files/login.jpg" data-canonical-src="readme_files/login.jpg" width="200" height="400" /> 
+<img src="readme_files/onboarding.jpg" data-canonical-src="readme_files/onboarding.jpg" width="200" height="400" /> <img src="readme_files/login.jpg" data-canonical-src="readme_files/login.jpg" width="200" height="400" /> <img src="readme_files/profile.jpg" data-canonical-src="readme_files/profile.jpg" width="200" height="400" /> <img src="readme_files/activities.jpg" data-canonical-src="readme_files/activities.jpg" width="200" height="400" /> <img src="readme_files/add.jpg" data-canonical-src="readme_files/add.jpg" width="200" height="400" /> 
