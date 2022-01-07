@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/onBoardingFragment">
+
+    <fragment
+        android:id="@+id/onBoardingFragment"
+        android:name="com.example.diplomstrava.presentation.onboarding.OnBoardingFragment"
+        android:label="OnBoardingFragment"
+        tools:layout="@layout/fragment_onboarding">
+        <action
+            android:id="@+id/action_onBoardingFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/rotate_in"
+            app:exitAnim="@anim/rotate_in"
+            app:popEnterAnim="@anim/rotate_in"
+            app:popExitAnim="@anim/rotate_in" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.diplomstrava.presentation.auth.AuthFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_containerFragment"
+            app:destination="@id/containerFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:launchSingleTop="false"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/containerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personFragment"
+        android:name="com.example.diplomstrava.presentation.person.PersonFragment"
+        android:label="PersonFragment"
+        tools:layout="@layout/fragment_person"/>
+    <fragment
+        android:id="@+id/containerFragment"
+        android:name="com.example.diplomstrava.presentation.containerfragment.ContainerFragment"
+        android:label="ContainerFragment"
+        tools:layout="@layout/fragment_container">
+        <action
+            android:id="@+id/action_containerFragment_to_addActivityFragment"
+            app:destination="@id/addActivityFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_containerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_containerFragment_to_shareListFragment"
+            app:destination="@id/shareListFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/activitiesFragment"
+        android:name="com.example.diplomstrava.presentation.activities.ActivitiesFragment"
+        android:label="ActivitiesFragment"
+        tools:layout="@layout/fragment_activities"/>
+    <fragment
+        android:id="@+id/addActivityFragment"
+        android:name="com.example.diplomstrava.presentation.addactivity.AddActivityFragment"
+        android:label="AddActivityFragment"
+        tools:layout="@layout/fragment_add_activity"/>
+    <fragment
+        android:id="@+id/shareListFragment"
+        android:name="com.example.diplomstrava.presentation.share.ShareListFragment"
+        android:label="ShareListFragment"
+        tools:layout="@layout/fragment_share_list"/>
+</navigation>
